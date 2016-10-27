@@ -92,15 +92,34 @@ body{
 	}
 
 .main-header-cart{
+	display: block;
 	float: left;
-	margin-left: 0px;
+	margin-left: 30px;
 	widows: 225px;
 }
 	.main-header-cart-pic{
-		float: left;
-		width: 225px;
+		display: inline-block;
+		width: 100px;
 		height: 68px;
 		background: url("../img/cart.png") no-repeat;
 		background-size: contain;
 		outline: none;
+	}
+
+	.main-header-cart-inyourcart{
+		display: inline-block;
+		text-decoration: none;
+	}
+	.main-header-cart-inyourcart-text{
+		display: block;
+		color: #000;
+		font-size: 24px;
+	}
+	.main-header-cart-inyourcart-items{
+		display: block;
+		font-size: 22px;
+		color: #909090;
+	}
+	.main-header-cart-inyourcart-itemsNum{
+		color: #65A4C4;
 	}
