@@ -4,9 +4,10 @@
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+	<script src="js/main.js"></script>
 	<title>Мегаполис</title>
 </head>
-<body>
+<body onload="bodyLoad()">
 	<div id="main-wrap">
 		<!-- HEADER -->
 		<header id="main-header">
@@ -61,10 +62,223 @@
 					<li><a href="#">Прайс</a></li>
 				</ul>
 			</div>
-
+		<hr class="shadowHr">
 		</header>
 		<!-- END OF HEADER -->
+		
+		<!-- MAIN -->
+		<main class="clearfix">
+			<!-- LEFT-NAV -->
+			<div class="left-nav">
+				<div class="container">
+					<ul id="left-nav-list">
+						<li><a href="#">Арматура <span class="whiteArrow">></span></a>
+							<ul>
+								<li><a href="#"></a>Арматура А1</li>
+								<li><a href="#"></a>Арматура А3</li>
+								<li><a href="#"></a>Арматура композитная</li>
+							</ul>
+						</li>
+						<li><a href="#">Проволока вязальная</a></li>
+						<li><a href="#">Квадрат стальной</a></li>
+						<li><a href="#">Балка двутавровая</a></li>
+						<li><a href="#">Уголок</a></li>
+						<li><a href="#">Швеллер</a></li>
+						<li><a href="#">Лист металлический<span class="whiteArrow">></span></a>
+							<ul>
+								<li><a href="#"></a>Арматура А1</li>
+								<li><a href="#"></a>Арматура А3</li>
+								<li><a href="#"></a>Арматура композитная</li>
+							</ul>
+						</li>
+						<li><a href="#">Полоса металлическая</a></li>
+						<li><a href="#">Профнастил<span class="whiteArrow">></span></a>
+							<ul>
+								<li><a href="#"></a>Арматура А1</li>
+								<li><a href="#"></a>Арматура А3</li>
+								<li><a href="#"></a>Арматура композитная</li>
+							</ul>
+							</li>
+						<li><a href="#">Трубной прокат</a></li>
+						<li><a href="#">Сетка металлическая</a></li>
+						<li><a href="#">Дополнительные материалы</a></li>
+						<li><a href="#">Винтовые сваи</a></li>
+						<li><a href="#">Оголовок</a></li>
+					</ul>
+				</div>
 
+				<!-- NEWSBAR -->
+				<div class="newsbar">
+					<span class="newsbar-title">
+						Новости
+					</span>
+					<a class="newsbar-article" href="#">
+						<img class="newsbar-article-pic" src="img/articleMini1.jpg">
+						<span class="newsbar-article-text">
+							В 2016 г. Золото Камчатки добудет свыше 5 т желтого металла
+						</span>
+						<span class="newsbar-article-date">
+							28.10.2016
+						</span>
+						<hr class="article_separator">
+					</a>
+					<a class="newsbar-article" href="#">
+						<img class="newsbar-article-pic" src="img/articleMini1.jpg">
+						<span class="newsbar-article-text">
+							В 2016 г. Золото Камчатки добудет свыше 5 т желтого металла
+						</span>
+						<span class="newsbar-article-date">
+							28.10.2016
+						</span>
+						<hr class="article_separator">
+					</a>
+					<a class="newsbar-article" href="#">
+						<img class="newsbar-article-pic" src="img/articleMini1.jpg">
+						<span class="newsbar-article-text">
+							В 2016 г. Золото Камчатки добудет свыше 5 т желтого металла
+						</span>
+						<span class="newsbar-article-date">
+							28.10.2016
+						</span>
+						<hr class="article_separator">
+					</a>
+				</div>
+				<!-- END OF NEWSBAR -->
+				<!-- ARTICLESBAR -->
+				<div class="articlesbar">
+					<span class="articlesbar-title">
+						Статьи
+					</span>
+					<a class="articlesbar-article" href="#">
+						<span class="articlesbar-article-title">
+							Как сделать заказ товара через наш интернет магазин металлопроката
+						</span>
+						<span class="articlesbar-article-text">
+							Уважаемые клиенты, посетители нашего интернет магазина и конкуренты специально для Вас,  мы решили сделать небольшой обзор-статью на тему   "Преимущества и недостатки заказа товара через интернет магазин"
+						</span>
+						<hr class="article_separator">
+					</a>
+					<a class="articlesbar-article" href="#">
+						<span class="articlesbar-article-title">
+							Забор из профильной трубы
+						</span>
+						<span class="articlesbar-article-text">
+							В этой статье мы рассмотрим использование профильной трубы при изготовлении забора
+						</span>
+						<hr class="article_separator">
+					</a>
+				</div>
+				<!-- END OF ARTICLESBAR -->
+			</div>
+			<!-- END OF LEFT NAV -->
+
+			<!-- SLIDER -->
+			<div class="slider clearfix">
+				<div class="container clearfix">
+					<div class="slider-pic" id="sliderPic" onmouseover="stopRunning()" onmouseleave="startRunning()">
+						<div class="slider-pic-text" id="sliderText">
+							Бесплатная резка в размер
+						</div>
+						<div class="slider-pic-balls">
+							<i class="fa fa-circle active" aria-hidden="true" id="circle0" onmouseup="clickCircle(0)" ></i>
+							<i class="fa fa-circle" aria-hidden="true" id="circle1" onmouseup="clickCircle(1)"></i>
+							<i class="fa fa-circle" aria-hidden="true" id="circle2" onmouseup="clickCircle(2)"></i>
+							<i class="fa fa-circle" aria-hidden="true" id="circle3" onmouseup="clickCircle(3)"></i>
+							<i class="fa fa-circle" aria-hidden="true" id="circle4" onmouseup="clickCircle(4)"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- END OF SLIDER -->
+
+			<!-- NEWS -->
+			<div class="news">
+				<div class="content clearfix">
+					<a href="#" class="article">
+						<span class="article-title">Сортовой прокат</span>
+						<span class="article-text">
+							Арматура <br>
+							Проволока вязальная<br>
+							Квадрат стальной
+						</span>
+					</a>
+					<a href="#" class="article">
+						<span class="article-title">Сортовой прокат</span>
+						<span class="article-text">
+							Арматура <br>
+							Проволока вязальная<br>
+							Квадрат стальной
+						</span>
+					</a>
+					<a href="#" class="article">
+						<span class="article-title">Сортовой прокат</span>
+						<span class="article-text">
+							Арматура <br>
+							Проволока вязальная<br>
+							Квадрат стальной
+						</span>
+					</a>
+					<a href="#" class="article">
+						<span class="article-title">Сортовой прокат</span>
+						<span class="article-text">
+							Арматура <br>
+							Проволока вязальная<br>
+							Квадрат стальной
+						</span>
+					</a>
+					<a href="#" class="article">
+						<span class="article-title">Сортовой прокат</span>
+						<span class="article-text">
+							Арматура <br>
+							Проволока вязальная<br>
+							Квадрат стальной
+						</span>
+					</a>
+					<a href="#" class="article">
+						<span class="article-title">Сортовой прокат</span>
+						<span class="article-text">
+							Арматура <br>
+							Проволока вязальная<br>
+							Квадрат стальной
+						</span>
+					</a>
+					<a href="#" class="article">
+						<span class="article-title">Сортовой прокат</span>
+						<span class="article-text">
+							Арматура <br>
+							Проволока вязальная<br>
+							Квадрат стальной
+						</span>
+					</a>
+					<a href="#" class="article">
+						<span class="article-title">Сортовой прокат</span>
+						<span class="article-text">
+							Арматура <br>
+							Проволока вязальная<br>
+							Квадрат стальной
+						</span>
+					</a>
+					<a href="#" class="article">
+						<span class="article-title">Сортовой прокат</span>
+						<span class="article-text">
+							Арматура <br>
+							Проволока вязальная<br>
+							Квадрат стальной
+						</span>
+					</a>
+				</div>
+			</div>
+			<!-- END OF NEWS -->
+		</main>
+		<!-- END OF MAIN -->
+
+		<!-- FOOTER -->
+		<footer>
+			<div class="container clearfix">
+				
+			</div>
+		</footer>
+		<!-- END OF FOOTER -->
 	</div>
 </body>
 </html>
