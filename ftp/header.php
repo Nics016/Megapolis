@@ -63,8 +63,8 @@
 		    		if ( function_exists( 'wp_nav_menu' ) )
 		        wp_nav_menu( 
 			        array( 
-			        'theme_location' => 'custom-menu',
-			        'fallback_cb'=> 'custom_menu',
+			        'theme_location' => 'top-menu',
+			        'fallback_cb'=> 'top_menu',
 			        'container' => 'ul',
 			        'menu_id' => 'top-nav-list',
 			        'menu_class' => '') 

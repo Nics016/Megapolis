@@ -19,11 +19,6 @@ body{
 	width: 100%;
 }
 
-main {
-	width: 1170px;
-	margin: 0 auto;
-}
-
 .container{
 	display: block;
 	width: 1170px;
@@ -34,6 +29,17 @@ main {
 	content: '';
 	display: table;
 	clear: both;
+}
+
+main{
+	width: 1170px;
+	margin: 0 auto;
+}
+
+main .main_container{
+	display: block;
+	width: 860px;
+	margin: 0 auto;
 }
 
 /* HEADER */
@@ -177,7 +183,7 @@ main {
 .left-nav{
 	display: block;
 	float: left;
-	width: 300px;
+	width: 260px;
 }
 
 #left-nav-list{
@@ -193,7 +199,7 @@ main {
 	background-color: #D7D7D7;
 	border-bottom: 1px solid #919191;
 	border-radius: 5px;
-	width: 300px;
+	width: 260px;
 	cursor: pointer;
 	background-image: url("../img/menu_1.png");
 	background-repeat: no-repeat;
@@ -208,7 +214,7 @@ main {
 #left-nav-list li a{
 	padding-left: 68px;
 	text-decoration: none;
-	font-size: 22px;
+	font-size: 18px;
 	color: #000;
 }
 
@@ -255,7 +261,7 @@ main {
 
 .newsbar-article-pic{
 	display: inline-block;
-	width: 300px;
+	width: 260px;
 }
 
 .newsbar-article-text{
@@ -336,7 +342,8 @@ main {
 	background: url("../img/slider0.jpg") no-repeat;
 	background-size: cover;
 	border-radius: 10px;
-	transition: background-color .4s ease-in;
+	transition: background-color .4s ease-in,
+				background-image 1s ease-out;
 }
 
 .slider-pic:hover{
@@ -372,9 +379,9 @@ main {
 /* NEWS */
 .news{
 	display: block;
-	float: left;
 	padding: 20px 0 0 50px;
-	width: 750px;
+	width: 700px;
+	overflow: hidden;
 }
 
 .article{
@@ -389,7 +396,7 @@ main {
 	border: 1px solid #D8DCE6;
 	border-radius: 10px;
 	outline: none;
-	width: 230px;
+	width: 215px;
 	height: 170px;
 	margin: 10px 10px 0 0;
 	text-decoration: none;
