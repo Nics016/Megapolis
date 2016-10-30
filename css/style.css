@@ -335,6 +335,12 @@ main .main_container{
 	width: 700px;
 }
 
+.slider-pic:hover{
+	/*grayscale for background image*/
+  background-color: #AAA;
+  background-blend-mode: darken;
+}
+
 .slider-pic{
 	display: block;
 	width: 720px;
@@ -344,12 +350,6 @@ main .main_container{
 	border-radius: 10px;
 	transition: background-color .4s ease-in,
 				background-image 1s ease-out;
-}
-
-.slider-pic:hover{
-	/*grayscale for background image*/
-  background-color: #AAA;
-  background-blend-mode: darken;
 }
 
 .slider-pic-text{
@@ -384,6 +384,11 @@ main .main_container{
 	overflow: hidden;
 }
 
+.article:hover{
+	background-color: #E6EAF5;
+	border: 1px solid #E6EAF5;
+}
+
 .article{
 	display: block;
 	float: left;
@@ -401,11 +406,6 @@ main .main_container{
 	margin: 10px 10px 0 0;
 	text-decoration: none;
 	transition: background-color .3s ease-in;
-}
-
-.article:hover{
-	background-color: #E6EAF5;
-	border: 1px solid #E6EAF5;
 }
 
 .article-title{
