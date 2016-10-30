@@ -1,7 +1,4 @@
-main{
-	width: 100%
-}
-
+/* CATEGORIES */
 main.categories_container{
 	width: 1170px;
 	margin: 0 auto;
@@ -13,11 +10,6 @@ main.categories_container{
 	width: 1170px;
 	margin: 0 auto;
 	margin-top: 50px;
-}
-
-.categories .container{
-	display: block;
-	margin: 0 auto;
 }
 
 .categories-title{
@@ -67,3 +59,4 @@ main.categories_container{
 	font-size: 24px;
 	color: #fff;
 }
+/* END OF CATEGORIES */

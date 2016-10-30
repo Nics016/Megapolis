@@ -44,8 +44,14 @@ main .main_container{
 
 /* HEADER */
 #main-header{
+	width: 100%;
 	margin: 5px auto;
 	margin-top: 10px;
+}
+
+.header_container{
+	width: 1170px;
+	margin: 0 auto;
 }
 
 .main-header-logo{
@@ -180,6 +186,11 @@ main .main_container{
 }
 
 /* LEFT-NAV */
+.left-nav-container{
+	display: block;
+	width: 1170px;
+	margin-top: 50px;
+}
 .left-nav{
 	display: block;
 	float: left;

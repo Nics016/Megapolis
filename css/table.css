@@ -1,0 +1,80 @@
+.table-container{
+	display: block;
+	float: left;
+	width: 860px;
+	padding-left: 50px;
+}	
+
+.table-title{
+	display: block;
+	text-transform: uppercase;
+	font-family: NarrowSansBold;
+	font-size: 32px;
+	color: #566473;
+}
+
+.table-text{
+	display: block;
+	margin-top: 50px;
+	font-size: 18px;
+	color: #686868;
+}
+
+.table-text-elements{
+	display: block;
+	border-collapse: collapse;
+}
+
+.table-text-elements th:first-child{
+	padding-right: 100px;
+	border-bottom: 2px solid #686868;
+}
+
+.table-text-elements tr{
+	border: 1px solid #BBB;
+}
+
+.table-text-elements th:first-child {
+	padding-left: 70px;
+	padding-right: 70px;
+}
+
+.table-text-elements th{
+	padding-right: 30px;
+	border-bottom: 2px solid #686868;
+}
+
+.table-text-elements td:first-child{
+	text-align: center;
+}
+
+.table-text-elements td:last-child{
+	padding-right: 20px;
+}
+
+.table-text-elements td{
+	font-size: 16px;
+	padding: 8px 0;
+}
+
+.table-text-elements-input{
+	border: 1px solid #AAA;
+	width: 50px;
+	padding-left: 10px;
+	font-size: 16px;
+	color: #686868;
+}
+
+.table-text-elements-cart:hover{
+	background-color: #EF7F7F;
+}
+
+.table-text-elements-cart{
+	background-color: #E13F3F;
+	padding: 5px 20px;
+	color: #fff;
+	border-radius: 5px;
+	font-size: 18px;
+	text-decoration: none;
+	transition: background-color .3s ease-in;
+}

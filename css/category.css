@@ -1,0 +1,53 @@
+.category-container{
+	display: block;
+	float: left;
+	width: 860px;
+	padding-left: 50px;
+}	
+
+.category-title{
+	display: block;
+	text-transform: uppercase;
+	font-family: NarrowSansBold;
+	font-size: 32px;
+	color: #566473;
+}
+
+.category-elements{
+	display: block;
+	margin-top: 50px;
+}
+
+.category-elements-item:hover{
+	background-color: #DDD;
+	background-blend-mode: darken;
+}
+
+.category-elements-item{
+	display: block;
+	float: left;
+	text-decoration: none;
+	width: 250px;
+	height: 250px;
+	margin-left: 30px;
+	transition: background-color .3s ease-in;
+} 
+
+.category-elements-item-pic{
+	display: block;
+	height: 200px;
+	width: 100%;
+	background: url("../img/category/armatura.png")
+				no-repeat;
+	background-size: cover;
+}
+
+.category-elements-item-text{
+	display: block;
+	color: #686868;
+	text-transform: uppercase;
+	text-align: center;
+	margin-top: 10px;
+	font-size: 18px;
+	font-family: NarrowSansBold;
+}

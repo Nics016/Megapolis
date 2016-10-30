@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="css/style.css">
-	<link rel="stylesheet" href="css/categories.css">
+	<link rel="stylesheet" href="css/table.css">
 	<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
 	<script src="js/main.js"></script>
 	<title>Мегаполис</title>
@@ -54,7 +54,7 @@
 			<!-- END OF CONTACT INFORMATION -->
 			<div id="top-nav" class="clearfix">
 				<ul id="top-nav-list">
-					<li><a href="#">Главная</a></li>
+					<li><a href="index.html">Главная</a></li>
 					<li><a href="#">Новости</a></li>
 					<li><a href="#">О компании</a></li>
 					<li><a href="#">Оплата и доставка</a></li>
@@ -69,64 +69,12 @@
 		<!-- MAIN -->
 		<main class="clearfix">
 			<div class="container">
-				<!-- CATEGORIES -->
-				<div class="categories_container clearfix">
-					<div class="categories">
-						<span class="categories-title">
-							Основные направления металлопродукции
-						</span>
-						<div class="categories-items">
-							<a href="category.html" class="categories-items-element">
-								<img src="img/cat1.png" class="categories-items-element-pic">
-								<span class="categories-items-element-text">Сортовый прокат</span>
-							</a>
-							<a href="#" class="categories-items-element">
-								<img src="img/cat2.png" class="categories-items-element-pic">
-								<span class="categories-items-element-text">Листовой прокат</span>
-							</a>
-							<a href="#" class="categories-items-element">
-								<img src="img/cat3.png" class="categories-items-element-pic">
-								<span class="categories-items-element-text">Трубы</span>
-							</a>
-							<a href="#" class="categories-items-element">
-								<img src="img/cat4.png" class="categories-items-element-pic">
-								<span class="categories-items-element-text">Профнастил</span>
-							</a>
-							<a href="#" class="categories-items-element">
-								<img src="img/cat5.png" class="categories-items-element-pic">
-								<span class="categories-items-element-text">Сэндвич панели</span>
-							</a>
-							<a href="#" class="categories-items-element">
-								<img src="img/cat6.png" class="categories-items-element-pic">
-								<span class="categories-items-element-text">Сетка</span>
-							</a>
-							<a href="#" class="categories-items-element">
-								<img src="img/cat7.png" class="categories-items-element-pic">
-								<span class="categories-items-element-text">Метизы и метсырье</span>
-							</a>
-							<a href="#" class="categories-items-element">
-								<img src="img/cat8.png" class="categories-items-element-pic">
-								<span class="categories-items-element-text">Нержавеющий прокат</span>
-							</a>
-							<a href="#" class="categories-items-element">
-								<img src="img/cat9.png" class="categories-items-element-pic">
-								<span class="categories-items-element-text">Трубопроводная арматура</span>
-							</a>
-							<a href="#" class="categories-items-element">
-								<img src="img/cat10.png" class="categories-items-element-pic">
-								<span class="categories-items-element-text">Другое</span>
-							</a>
-						</div>
-					</div>
-				</div>
-				<!-- END OF CATEGORIES -->
-
 				<!-- LEFT-NAV -->
 				<div class="left-nav-container">
 					<div class="left-nav">
 						<div class="left-nav-list-container">
 							<ul id="left-nav-list">
-								<li><a href="category.html">Арматура <span class="whiteArrow">></span></a>
+								<li><a href="#">Арматура <span class="whiteArrow">></span></a>
 									<ul>
 										<li><a href="#"></a>Арматура А1</li>
 										<li><a href="#"></a>Арматура А3</li>
@@ -223,26 +171,147 @@
 						</div>
 						<!-- END OF ARTICLESBAR -->
 					</div>
-					<!-- SLIDER -->			
-					<div class="container clearfix">
-						<div class="slider clearfix">
-							<div class="slider-pic" id="sliderPic" onmouseover="stopRunning()" onmouseleave="startRunning()">
-								<div class="slider-pic-text" id="sliderText">
-									Бесплатная резка в размер
-								</div>
-								<div class="slider-pic-balls">
-									<i class="fa fa-circle active" aria-hidden="true" id="circle0" onmouseup="clickCircle(0)" ></i>
-									<i class="fa fa-circle" aria-hidden="true" id="circle1" onmouseup="clickCircle(1)"></i>
-									<i class="fa fa-circle" aria-hidden="true" id="circle2" onmouseup="clickCircle(2)"></i>
-									<i class="fa fa-circle" aria-hidden="true" id="circle3" onmouseup="clickCircle(3)"></i>
-									<i class="fa fa-circle" aria-hidden="true" id="circle4" onmouseup="clickCircle(4)"></i>
-								</div>
-							</div>
-						</div>
-						<!-- END OF SLIDER -->
-					</div>
 				</div>
 				<!-- END OF LEFT NAV -->
+
+				<!-- TABLE -->
+				<div class="table-container clearfix">
+					<div class="table">
+						<span class="table-title">
+							Арматура
+						</span>
+						<div class="table-text">
+							<table class="table-text-elements">
+							<tr>
+								<th><span>Название</span></th>
+								<th>Марка стали</th>
+								<th>Вес метра</th>
+								<th>Длина</th>
+								<th>Цена</th>
+								<th>Сумма</th>
+								<th>Количество</th>
+								<th></th>
+							</tr>
+
+							<tr>
+								<td>Арматура А1 6 мм</td>
+								<td>А240</td>
+								<td>0.222 кг</td>
+								<td>6 м</td>
+								<td>9 руб</td>
+								<td>9 руб</td>
+								<td>
+									<input type="text" value="1" class="table-text-elements-input">
+								</td>
+								<td>
+									<a href="#" class="table-text-elements-cart">
+										В корзину
+									</a>
+								</td>
+							</tr>
+							<tr>
+								<td>Арматура А1 6 мм</td>
+								<td>А240</td>
+								<td>0.222 кг</td>
+								<td>6 м</td>
+								<td>9 руб</td>
+								<td>9 руб</td>
+								<td>
+									<input type="text" value="1" class="table-text-elements-input">
+								</td>
+								<td>
+									<a href="#" class="table-text-elements-cart">
+										В корзину
+									</a>
+								</td>
+							</tr>
+							<tr>
+								<td>Арматура А1 6 мм</td>
+								<td>А240</td>
+								<td>0.222 кг</td>
+								<td>6 м</td>
+								<td>9 руб</td>
+								<td>9 руб</td>
+								<td>
+									<input type="text" value="1" class="table-text-elements-input">
+								</td>
+								<td>
+									<a href="#" class="table-text-elements-cart">
+										В корзину
+									</a>
+								</td>
+							</tr>
+							<tr>
+								<td>Арматура А1 6 мм</td>
+								<td>А240</td>
+								<td>0.222 кг</td>
+								<td>6 м</td>
+								<td>9 руб</td>
+								<td>9 руб</td>
+								<td>
+									<input type="text" value="1" class="table-text-elements-input">
+								</td>
+								<td>
+									<a href="#" class="table-text-elements-cart">
+										В корзину
+									</a>
+								</td>
+							</tr>
+							<tr>
+								<td>Арматура А1 6 мм</td>
+								<td>А240</td>
+								<td>0.222 кг</td>
+								<td>6 м</td>
+								<td>9 руб</td>
+								<td>9 руб</td>
+								<td>
+									<input type="text" value="1" class="table-text-elements-input">
+								</td>
+								<td>
+									<a href="#" class="table-text-elements-cart">
+										В корзину
+									</a>
+								</td>
+							</tr>
+							<tr>
+								<td>Арматура А1 6 мм</td>
+								<td>А240</td>
+								<td>0.222 кг</td>
+								<td>6 м</td>
+								<td>9 руб</td>
+								<td>9 руб</td>
+								<td>
+									<input type="text" value="1" class="table-text-elements-input">
+								</td>
+								<td>
+									<a href="#" class="table-text-elements-cart">
+										В корзину
+									</a>
+								</td>
+							</tr>
+							<tr>
+								<td>Арматура А1 6 мм</td>
+								<td>А240</td>
+								<td>0.222 кг</td>
+								<td>6 м</td>
+								<td>9 руб</td>
+								<td>9 руб</td>
+								<td>
+									<input type="text" value="1" class="table-text-elements-input">
+								</td>
+								<td>
+									<a href="#" class="table-text-elements-cart">
+										В корзину
+									</a>
+								</td>
+							</tr>
+
+							</table>
+						</div>
+					</div>
+					
+				</div>
+				<!-- END OF TABLE -->
 			</div>
 		</main>
 		<!-- END OF MAIN -->
