@@ -1,0 +1,103 @@
+/* CATEGORIES */
+main.categories_container{
+	width: 1170px;
+	margin: 0 auto;
+}
+
+.categories{
+	display: block;
+	overflow: hidden;
+	width: 1170px;
+	margin: 0 auto;
+	margin-top: 50px;
+}
+
+.categories-title{
+	display: inline-block;
+	width: 550px;
+	margin-left: 300px;
+	font-size: 34px;
+	font-family: NarrowSansBold;
+	color: #2C343F;
+}
+
+.categories-items{
+	display: block;
+	width: 1170px;
+	margin: 0 auto;
+	margin-top: 50px;
+}
+
+.categories-items-element:hover{
+	background-image: url("../img/categoryRawBackgroundHover.jpg");
+}
+
+.categories-items-element{
+	display: block;
+	float: left;
+	margin-top: 10px;
+	margin-left: 10px;
+	width: 200px;
+	height: 230px;
+	background: url("../img/categoryRawBackground.JPG") no-repeat;
+	background-size: cover;
+	border-radius: 10px;
+	text-align: center;
+	transition: background-image .3s ease-in;
+	-moz-transition: background-image .3s ease-in;
+	text-decoration: none;
+}
+
+.categories-items-element:nth-child(2) span.categories-items-element-pic{
+	background-image: url("../img/cat2.png");
+}
+
+.categories-items-element:nth-child(3) span.categories-items-element-pic{
+	background-image: url("../img/cat3.png");
+}
+
+.categories-items-element:nth-child(4) span.categories-items-element-pic{
+	background-image: url("../img/cat4.png");
+}
+
+.categories-items-element:nth-child(5) span.categories-items-element-pic{
+	background-image: url("../img/cat5.png");
+}
+
+.categories-items-element:nth-child(6) span.categories-items-element-pic{
+	background-image: url("../img/cat6.png");
+}
+
+.categories-items-element:nth-child(7) span.categories-items-element-pic{
+	background-image: url("../img/cat7.png");
+}
+
+.categories-items-element:nth-child(8) span.categories-items-element-pic{
+	background-image: url("../img/cat8.png");
+}
+
+.categories-items-element:nth-child(9) span.categories-items-element-pic{
+	background-image: url("../img/cat9.png");
+}
+
+.categories-items-element:nth-child(10) span.categories-items-element-pic{
+	background-image: url("../img/cat10.png");
+}
+
+.categories-items-element-pic{
+	display: block;
+	width: 180px;
+	height: 150px;
+	margin-left: 10px;
+	margin-top: 15px;
+	background: url("../img/cat1.png") no-repeat;
+	background-size: cover;
+}
+
+.categories-items-element-text{
+	display: block;
+	font-size: 24px;
+	padding-top: 145px;
+	color: #fff;
+}
+/* END OF CATEGORIES */

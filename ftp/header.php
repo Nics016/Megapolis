@@ -50,27 +50,34 @@
 		</div>
 		<!-- END OF CONTACT INFORMATION -->
 		<div id="top-nav" class="clearfix">
-			<!-- <ul id="top-nav-list">
-				<li><a href="#">Главная</a></li>
-				<li><a href="#">Новости</a></li>
-				<li><a href="#">О компании</a></li>
-				<li><a href="#">Оплата и доставка</a></li>
-				<li><a href="#">Статьи</a></li>
-				<li><a href="#">Контакты</a></li>
-				<li><a href="#">Прайс</a></li>
-			</ul> -->
-	        <?php
-		    		if ( function_exists( 'wp_nav_menu' ) )
-		        wp_nav_menu( 
-			        array( 
-			        'theme_location' => 'top-menu',
-			        'fallback_cb'=> 'top_menu',
-			        'container' => 'ul',
-			        'menu_id' => 'top-nav-list',
-			        'menu_class' => '') 
-						);
-		    		else custom_menu();
-					?>
+			<!-- TOP MENU -->
+      <?php
+    		if ( function_exists( 'wp_nav_menu' ) )
+        wp_nav_menu( 
+	        array( 
+	        'theme_location' => 'top-menu',
+	        'fallback_cb'=> 'top_menu',
+	        'container' => 'ul',
+	        'menu_id' => 'top-nav-list',
+	        'menu_class' => 'nav') 
+				);
+    		else custom_menu();
+			?>
+			<!-- END OF TOP MENU -->
+			<!-- MENU IN LEFT SIDEBAR -->
+			<!-- <?php
+    		if ( function_exists( 'wp_nav_menu' ) )
+        wp_nav_menu( 
+	        array( 
+	        'theme_location' => 'left-menu',
+	        'fallback_cb'=> 'left_menu',
+	        'container' => 'ul',
+	        'menu_id' => 'left-nav-list',
+	        'menu_class' => '') 
+				);
+    		else custom_menu();
+			?> -->
+			<!-- END OF MENU IN LEFT SIDEBAR -->
 		</div>
 	<hr class="shadowHr">
 	</header>
