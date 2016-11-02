@@ -9,6 +9,12 @@ function _s_styles()
 	wp_enqueue_style('main', get_template_directory_uri(). '/css/style.css');
 	wp_register_style('main_categories', get_template_directory_uri(). '/css/categories.css');
 	wp_enqueue_style('main_categories', get_template_directory_uri(). '/css/categories.css');
+	wp_register_style('category', get_template_directory_uri(). '/css/category.css');
+	wp_enqueue_style('category', get_template_directory_uri(). '/css/category.css');
+	wp_register_style('table', get_template_directory_uri(). '/css/table.css');
+	wp_enqueue_style('table', get_template_directory_uri(). '/css/table.css');
+	wp_register_style('footer', get_template_directory_uri(). '/css/footer.css');
+	wp_enqueue_style('footer', get_template_directory_uri(). '/css/footer.css');
 
 	wp_register_style('fontawesome', get_template_directory_uri(). '/font-awesome/css/font-awesome.min.css');
 	wp_enqueue_style('fontawesome', get_template_directory_uri(). '/font-awesome/css/font-awesome.min.css');
@@ -62,3 +68,46 @@ function register_wp_sidebars() {
 	// register_sidebar(...
 }
 add_action( 'widgets_init', 'register_wp_sidebars' );
+
+// Добавление кнопки добавления миниатюры
+add_theme_support( 'post-thumbnails' );
+
+// Функции обработки категорий
+	// функция для вырезания src картинки из img
+	function getImageUrl($img){
+		$iImgPos = strpos($img,"src=") + 5;
+		$sSrcStart = substr($img, $iImgPos);
+		$iQuotePos = strpos($sSrcStart, '"');
+		$answ = substr($sSrcStart, 0, $iQuotePos); 
+		return $answ;
+	}
+		
+	// загружаем список категорий в массив $terms
+	// чтобы позже получить их thumbnails
+	function get_all_terms(){
+		$taxonomy = 'category';
+	    $args = array(
+	        'orderby'           => 'id', 
+	        'order'             => 'ASC',
+	        'hide_empty'        => false, 
+	        'exclude'           => array(1), 
+	        'exclude_tree'      => array(), 
+	        'include'           => array(),
+	        'number'            => '', 
+	        'fields'            => 'all', 
+	        'slug'              => '',
+	        'parent'            => '',
+	        'hierarchical'      => true, 
+	        'child_of'          => 0,
+	        'childless'         => false,
+	        'get'               => '', 
+	        'name__like'        => '',
+	        'description__like' => '',
+	        'pad_counts'        => false, 
+	        'offset'            => '', 
+	        'search'            => '', 
+	        'cache_domain'      => 'core',
+	    );
+	    $terms = get_terms($taxonomy, $args);
+	    return $terms;
+	}

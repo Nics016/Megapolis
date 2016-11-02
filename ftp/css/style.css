@@ -11,6 +11,7 @@
 
 body{
 	margin: 0;
+	background-color: #F3F3F3;
 }
 
 
@@ -66,7 +67,8 @@ main .container{
 
 .main-header-phone{
 	float: left;
-	margin-left: 30px;
+	margin-left: 50px;
+	width: 270px;
 }
 	.main-header-phone i{
 		color: #C0C0C0;
@@ -91,7 +93,7 @@ main .container{
 
 .main-header-address{
 	float: left;
-	margin-left: 30px;
+	margin-left: 5px;
 	display: inline-block;
 	width: 300px;
 }
@@ -210,71 +212,48 @@ main .container{
 	background-color: #E6E6E6;
 }
 
-#menu-menu-in-left-sidebar>li:nth-child(1):after,
-#menu-menu-in-left-sidebar>li:nth-child(7):after,
-#menu-menu-in-left-sidebar>li:nth-child(9):after,
-#menu-menu-in-left-sidebar>li:nth-child(10):after,
-#menu-menu-in-left-sidebar>li:nth-child(11):after,
-#menu-menu-in-left-sidebar>li:nth-child(13):after,
-#menu-menu-in-left-sidebar>li:nth-child(14):after{
+.menu-item-has-children:after{
 	content: '>';
 	color: #fff;
 	float: right;
 	margin-right: 10px;
-	margin-top: -10px;
-	font-size: 40px;
-	font-family: NarrowSansBold;
-} 
-
-#menu-menu-in-left-sidebar>li:nth-child(12):after{
-	content: '>';
-	color: #fff;
-	float: right;
-	margin-right: 10px;
-	margin-top: -40px;
-	font-size: 40px;
+	margin-top: -7px;
+	font-size: 25px;
 	font-family: NarrowSansBold;
 } 
 
 #menu-menu-in-left-sidebar li{
-	padding: 15px 0;
 	margin: 0;
 	margin-bottom: 1px;
 	background-color: #D7D7D7;
 	border-bottom: 1px solid #919191;
 	border-radius: 5px;
 	width: 260px;
+	line-height: 51px; /*! to make vertical align of li a working*/
 	cursor: pointer;
 	background-image: url("../img/menu_1.png");
 	background-repeat: no-repeat;
 	background-size: contain;
-	transition: background-color .3s ease-in;
-}
-
-#menu-menu-in-left-sidebar li a .whiteArrow{
-	color: #fff;
-	float: right;
-	margin-right: 10px;
-	margin-top: -10px;
-	font-size: 40px;
-	font-family: NarrowSansBold;
 }
 
 #menu-menu-in-left-sidebar li a{
 	padding-left: 68px;
 	text-decoration: none;
-	font-size: 18px;
+	font-size: 16px;
+	vertical-align: middle; /* ! */
 	color: #000;
 }
 
 #menu-menu-in-left-sidebar li ul{
 	position: absolute;
-	margin: -35px 0 0 225px;
+	margin: -55px 0 0 225px;
 	display: none;
 	list-style-type: none;
 }
 
-#menu-menu-in-left-sidebar li:hover ul {display: block;}
+#menu-menu-in-left-sidebar li:hover ul {
+	display: block;
+}
 
 /* NEWSBAR */
 .newsbar{
@@ -462,15 +441,11 @@ main .container{
 	color: #000;
 }
 
-/* FOOTER */
-footer{
-	display: block;
-	margin: 0 auto;
-	margin-top: 50px;
-	width: 100%;
-	background-color: #484C58;
-}
 
-footer .container{
-	height: 300px;
-}
+/* CONTENT */
+.content{
+	display: block;
+	float: left;
+	width: 860px;
+	padding-left: 50px;
+}	

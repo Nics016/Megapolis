@@ -7,62 +7,48 @@
 	endwhile;
 	endif;
 ?>
+	<!-- GETTING TERMS -->
+	<?php 
+		$terms = get_all_terms();
+	?>
+	<!-- END OF GETTING TERMS -->
+
 	<!-- CATEGORIES -->
 	<div class="categories_container clearfix">
 		<div class="categories">
 			<span class="categories-title">
 				Основные направления металлопродукции
 			</span>
-			<div class="categories-items">
-				<a href="category.html" class="categories-items-element">
-					<span class="categories-items-element-pic">
-					<span class="categories-items-element-text">Сортовый прокат</span>
+			<div class="categories-items clearfix">
+				<?php 
+					if (!empty($terms) && !is_wp_error($terms) ){
+						foreach ($terms as $term) {
+							// вырезаем url thumbnail категории
+							$img = get_term_thumbnail( $term->term_taxonomy_id, $size = 'category-thumb', $attr = '' );
+							$sImageUrl = getImageUrl($img."<br>");
+				?>
+				<a href="<?php echo('/category' . $taxonomy . '/' . $term->slug);?>" class="categories-items-element">
+					<span class="categories-items-element-pic" style="background-image: url('<?php echo $sImageUrl; ?>');">
+					<span class="categories-items-element-text">
+						<?php echo $term->name; ?>
+					</span>
 				</a>
-				<a href="#" class="categories-items-element">
-					<span class="categories-items-element-pic">
-					<span class="categories-items-element-text">Листовой прокат</span>
-				</a>
-				<a href="#" class="categories-items-element">
-					<span class="categories-items-element-pic">
-					<span class="categories-items-element-text">Трубы</span>
-				</a>
-				<a href="#" class="categories-items-element">
-					<span class="categories-items-element-pic">
-					<span class="categories-items-element-text">Профнастил</span>
-				</a>
-				<a href="#" class="categories-items-element">
-					<span class="categories-items-element-pic">
-					<span class="categories-items-element-text">Сэндвич панели</span>
-				</a>
-				<a href="#" class="categories-items-element">
-					<span class="categories-items-element-pic">
-					<span class="categories-items-element-text">Сетка</span>
-				</a>
-				<a href="#" class="categories-items-element">
-					<span class="categories-items-element-pic">
-					<span class="categories-items-element-text">Метизы и метсырье</span>
-				</a>
-				<a href="#" class="categories-items-element">
-					<span class="categories-items-element-pic">
-					<span class="categories-items-element-text">Нержавеющий прокат</span>
-				</a>
-				<a href="#" class="categories-items-element">
-					<span class="categories-items-element-pic">
-					<span class="categories-items-element-text">Трубопроводная арматура</span>
-				</a>
-				<a href="#" class="categories-items-element">
-					<span class="categories-items-element-pic">
-					<span class="categories-items-element-text">Другое</span>
-				</a>
+				<?php
+						}
+					}
+				?>
 			</div>
 		</div>
 	</div>
 	<!-- END OF CATEGORIES -->
 	
-	<div class="container">
-		
+	<div class="container clearfix">
 		<?php get_sidebar(); ?>
+		<!-- CONTENT -->
+		<div class="content">
+			123
+		</div>
+		<!-- END OF CONTENT -->
 	</div>
-	123
 </main> 
 <?php get_footer(); ?>

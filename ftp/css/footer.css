@@ -1,0 +1,76 @@
+/* FOOTER */
+footer{
+	display: block;
+	margin: 0 auto;
+	margin-top: 50px;
+	width: 100%;
+	height: 300px;
+	background-color: #484C58;
+	color: #fff;
+	font-size: 16px;
+}
+
+footer .container{
+	padding-top: 50px;
+}
+
+footer a{
+	display: block;
+	color: #fff;
+	text-decoration: none;
+}
+
+.footer-categories{
+	display: block;
+	float: left;
+	width: 660px;
+	padding-right: 10px;
+}
+
+.footer-categories-title{
+}
+
+.footer-categories-hr{
+	color: #fff;
+}
+
+.footer-categories ul{
+	list-style-type: none;
+	height: 100px;
+	width: 400px;
+}
+
+.footer-categories ul li{
+	display: block;
+	float: left;
+	width: 200px;
+	padding: 3px 0;
+}
+
+.footer-info{
+	display: block;
+	float: left;
+	width: 160px;
+	margin-left: 50px;
+	padding-right: 10px;
+}
+
+.footer-info a{
+	padding: 3px 0;
+}
+
+.footer-shopinfo{
+	display: block;
+	float: left;
+	width: 220px;
+	margin-left: 50px;
+	padding-right: 10px;
+}
+
+.footer-shopinfo-text i{
+	font-size: 22px;
+}
+
+.footer-shopinfo-text-email{
+	margin-left: 5px;
+}

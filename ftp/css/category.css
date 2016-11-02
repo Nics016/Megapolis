@@ -26,6 +26,7 @@
 .category-elements-item{
 	display: block;
 	float: left;
+	outline: none;
 	text-decoration: none;
 	width: 250px;
 	height: 250px;

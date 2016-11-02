@@ -432,16 +432,3 @@ main .main_container{
 	font-size: 14px;
 	color: #000;
 }
-
-/* FOOTER */
-footer{
-	display: block;
-	margin: 0 auto;
-	margin-top: 50px;
-	width: 100%;
-	background-color: #484C58;
-}
-
-footer .container{
-	height: 300px;
-}
