@@ -74,6 +74,9 @@ add_action( 'widgets_init', 'register_wp_sidebars' );
 // Добавление кнопки добавления миниатюры поста
 add_theme_support( 'post-thumbnails' );
 
+
+
+// --- CUSTOM FUNCTIONS ---
 // Функции обработки категорий
 	// функция для вырезания src картинки из img
 	function getImageUrl($img){
@@ -86,7 +89,7 @@ add_theme_support( 'post-thumbnails' );
 		
 	// загружаем список категорий в массив $terms
 	// чтобы позже получить их thumbnails
-	function get_all_terms(){
+	function get_children_terms($parent_id){
 		$taxonomy = 'category';
 	    $args = array(
 	        'orderby'           => 'id', 
@@ -100,7 +103,7 @@ add_theme_support( 'post-thumbnails' );
 	        'slug'              => '',
 	        'parent'            => '',
 	        'hierarchical'      => true, 
-	        'child_of'          => 19,
+	        'child_of'          => $parent_id,
 	        'childless'         => false,
 	        'get'               => '', 
 	        'name__like'        => '',
@@ -113,3 +116,109 @@ add_theme_support( 'post-thumbnails' );
 	    $terms = get_terms($taxonomy, $args);
 	    return $terms;
 	}
+
+// вывод названия категории, которая является самым высшим предком
+// данной категории, не доходя до нулевой
+function Get_Cat_Ancestor_Name($cat_ID)
+{	
+	$cur_Parent_ID = -1;
+	$cur_Category = -1;
+	$cur_Cat_ID = $cat_ID;
+
+	// пока $cur_Parent_ID != 0, идем вверх по дереву категорий
+	do {
+		$cur_Category = get_category($cur_Cat_ID);
+		$cur_Parent_ID = $cur_Category->category_parent;
+		if ($cur_Parent_ID != 0)
+		{
+			$cur_Cat_ID = $cur_Parent_ID;
+		}
+	} while ($cur_Parent_ID != 0);
+
+	// наконец, возвращаем название категории предка
+	$answ = get_cat_name($cur_Cat_ID);
+	return $answ;
+}
+
+// определяет, есть ли у текущей категории дети
+function category_has_children() {
+	global $wpdb;   
+	$term = get_queried_object();
+	$category_children_check = $wpdb->get_results(" SELECT * FROM wp_term_taxonomy WHERE parent = '$term->term_id' ");
+    if ($category_children_check) {
+        return true;
+    } else {
+       return false;
+    }
+}  
+
+
+//класс для вывода таблиц
+
+class productTableModel
+{
+
+
+	public function is_table($table_id)
+	{	
+		global $wpdb;
+		$query = "SELECT ID FROM tovars_tables WHERE ID = $table_id";
+		$result = $wpdb->get_results($query, 'ARRAY_A');
+
+		if ( !empty($result) )
+			return true;
+		else
+			return false;
+	}
+
+	public function get_table_data($table_id)
+	{
+		global $wpdb;
+		$query = "SELECT name, price, attributes FROM tovars_tables WHERE ID = $table_id";
+		$result = $wpdb->get_results($query, 'ARRAY_A');
+
+		//для удобства
+		$result = $result[0];
+		return $result;
+	}
+
+	//метод для вывода товаров
+	public function get_tovars( $table_id )
+	{
+		global $wpdb;
+		$query = "SELECT tovars_ids FROM tovars_tables WHERE ID = $table_id";
+		$tovars_ids = $wpdb->get_results($query, 'ARRAY_A');
+
+		//проверм, есть ли такая таблицы
+		if ( $tovars_ids != NULL )
+		{
+			
+			//берем товары по их id
+			$tovars_ids = unserialize($tovars_ids[0]['tovars_ids']);
+
+			// цикле сформируем запрос
+			$query = "SELECT * FROM tovars WHERE ";
+			for ( $i = 0; $i < count($tovars_ids); $i++ ){
+
+				$ID = $tovars_ids[$i];
+				$query .= ( $i == 0 ) ? "ID = $ID" : " OR ID = $ID";
+
+			}
+
+			$tovars = $wpdb->get_results($query, 'ARRAY_A');
+			return $tovars;
+
+		}
+		else
+			return false;
+	}
+
+	public function view_table($table_data, $tovars)
+	{
+		//ся грязь происходит в шаблоне
+		require('templates/table_view_template.php');
+	}
+}
+
+// --- END OF CUSTOM FUNCTIONS ---
+

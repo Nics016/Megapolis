@@ -1,6 +1,6 @@
 	<footer>
 		<div class="container clearfix">
-			<?php $terms = get_all_terms(); ?>
+			<?php $terms = get_children_terms(19); ?>
 
 			<!-- FOOTER-CATEGORIES -->
 			<div class="footer-categories">
@@ -12,11 +12,17 @@
 				<?php 
 					if (!empty($terms) && !is_wp_error($terms) ){
 						foreach ($terms as $term) {
+							// выводим только первых детей категории:
+							$category = get_category($term->term_taxonomy_id);
+							$Parent_ID = $category->category_parent;
+							if ($Parent_ID == 19)
+							{
 				?>
 					<li>
 						<a href="<?php echo('/category' . $taxonomy . '/' . $term->slug);?>"> <?php echo $term->name; ?> </a>
 					</li>
 				<?php
+							}
 						}
 					}
 				?>

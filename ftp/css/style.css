@@ -447,6 +447,18 @@ main .container{
 .content{
 	display: block;
 	float: left;
+	overflow: hidden;
 	width: 860px;
 	padding-left: 50px;
 }	
+
+.content-title{
+	display: block;
+	font-family: NarrowSansBold;
+	font-size: 32px;
+	color: #566473;
+}
+
+.content-text{
+	display: block;
+}

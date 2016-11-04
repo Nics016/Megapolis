@@ -1,0 +1,9 @@
+.cart-items{
+	display: block;
+	margin-top: 30px;
+}
+
+#cart-items-table{
+	display: block;
+	border-collapse: collapse;
+}

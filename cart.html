@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/cart.css">
+	<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+	<script src="js/main.js"></script>
+	<title>Мегаполис</title>
+</head> 
+<body onload="bodyLoad()">
+	<div id="main-wrap">
+		<!-- CONTENT -->
+		<div class="content clearfix">
+			<div class="cart">
+				<span class="content-title">
+					В корзине:
+				</span>
+				<div class="cart-items">
+					<table id="cart-items-table">
+						<tr>
+							<th>Товары</th>
+							<th></th>
+							<th>Цена</th>
+							<th>Количество</th>
+							<th>Сумма</th>
+							<th></th>
+						</tr>
+						<tr>
+							<td><span class="cart-items-table-pic"></span></td>
+							<td>Арматура А1 6 мм</td>
+							<td>9 руб.</td>
+							<td>4</td>
+							<td>36 руб.</td>
+							<td> <a href="#" class="cart-items-table-delete">Удалить</a></td>
+						</tr>
+					</table>
+				</div>
+				<div class="cart-orderinfo">
+					<span class="cart-orderinfo-sum">
+						Итого: <span id="orderSum">36</span> руб.
+					</span>
+				</div>
+			</div>
+
+			<form class="contactForm">
+				<span class="contactForm-title">
+					Информация о покупателе
+				</span>
+				<label for="customer_Name_id" class="contactForm-lab">
+					Ф.И.О
+				</label>
+				<input type="text" name="customer_Name" id="customer_Name_id" class="contactForm-field">
+				<input type="submit" class="cart-orderinfo-makeorder" value="Оформить заказ"></a>
+			</form>
+
+		</div>
+		<!-- END OF CONTENT -->
+	</div>
+</body>
+</html>
