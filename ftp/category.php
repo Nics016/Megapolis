@@ -1,3 +1,4 @@
+<?php /* Template Name: Category-Product */ ?>
 <?php get_header();?>
 <main>
 	<div class="container clearfix">

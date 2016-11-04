@@ -15,6 +15,8 @@ function _s_styles()
 	wp_enqueue_style('table', get_template_directory_uri(). '/css/table.css');
 	wp_register_style('footer', get_template_directory_uri(). '/css/footer.css');
 	wp_enqueue_style('footer', get_template_directory_uri(). '/css/footer.css');
+	wp_register_style('category-articles', get_template_directory_uri(). '/css/category-articles.css');
+	wp_enqueue_style('category-articles', get_template_directory_uri(). '/css/category-articles');
 
 	wp_register_style('fontawesome', get_template_directory_uri(). '/font-awesome/css/font-awesome.min.css');
 	wp_enqueue_style('fontawesome', get_template_directory_uri(). '/font-awesome/css/font-awesome.min.css');
@@ -59,7 +61,7 @@ function register_wp_sidebars() {
 			'id' => 'left_sideb', // уникальный id
 			'name' => 'Левый сайдбар', // название сайдбара
 			'description' => 'Перетащите сюда виджеты, чтобы добавить их в сайдбар.', // описание
-			'before_widget' => '<div class="">', // по умолчанию виджеты выводятся <li>-списком
+			'before_widget' => '<div id="%1$s" class="">', // по умолчанию виджеты выводятся <li>-списком
 			'after_widget' => '</div>',
 			'before_title' => '<h3 class="widget-title">', // по умолчанию заголовки виджетов в <h2>
 			'after_title' => '</h3>'
@@ -69,7 +71,7 @@ function register_wp_sidebars() {
 }
 add_action( 'widgets_init', 'register_wp_sidebars' );
 
-// Добавление кнопки добавления миниатюры
+// Добавление кнопки добавления миниатюры поста
 add_theme_support( 'post-thumbnails' );
 
 // Функции обработки категорий
@@ -90,7 +92,7 @@ add_theme_support( 'post-thumbnails' );
 	        'orderby'           => 'id', 
 	        'order'             => 'ASC',
 	        'hide_empty'        => false, 
-	        'exclude'           => array(1), 
+	        'exclude'           => array(), 
 	        'exclude_tree'      => array(), 
 	        'include'           => array(),
 	        'number'            => '', 
@@ -98,7 +100,7 @@ add_theme_support( 'post-thumbnails' );
 	        'slug'              => '',
 	        'parent'            => '',
 	        'hierarchical'      => true, 
-	        'child_of'          => 0,
+	        'child_of'          => 19,
 	        'childless'         => false,
 	        'get'               => '', 
 	        'name__like'        => '',

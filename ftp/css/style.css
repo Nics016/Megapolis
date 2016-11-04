@@ -72,14 +72,15 @@ main .container{
 }
 	.main-header-phone i{
 		color: #C0C0C0;
-		font-size: 32px;
+		font-size: 30px;
 	}
 	.main-header-phone-text{
 		display: block;
 		text-decoration: none;
+		text-align: center;
 		outline: none;
 		color: #425972;
-		font-size: 32px;
+		font-size: 30px;
 	}
 	.main-header-phone-subtext{
 		display: inline-block;
@@ -87,7 +88,7 @@ main .container{
 		margin-left: 15px;
 		width: 225px;
 		color: #7B7B7B;
-		font-size: 20px;
+		font-size: 17px;
 	}
 
 
@@ -108,7 +109,7 @@ main .container{
 		display: inline-block;
 		margin-left: 5px;
 		color: #425972;
-		font-size: 26px;
+		font-size: 20px;
 	}
 
 .main-header-cart{

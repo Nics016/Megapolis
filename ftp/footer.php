@@ -47,7 +47,6 @@
 					<i class="fa fa-envelope" aria-hidden="true"></i>
 					<span class="footer-shopinfo-text-email">E-mail: info@megapolis-mck.ru</span>
 				</div>
-
 			</div>
 		</div>
 	</footer>

@@ -38,7 +38,7 @@ main.categories_container{
 	margin-left: 0px;
 }
 
-.categories-items-element:nth-child(6n){
+.categories-items-element:nth-child(5n+1){
 	margin-left: 0px;
 }
 
