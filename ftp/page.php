@@ -2,21 +2,57 @@
 <main>
 	<div class="container">
 		<?php get_sidebar(); ?>
-		<?php 
-			if(have_posts()):
-			while(have_posts()):
-				the_post();
-		?>	
-		<div class="category-container clearfix">
-			<?php the_title(); ?>
-			<?php the_title(); ?>
-		</div>
+		<div class="content">
+			<?php 
+				if(have_posts()):
+				while(have_posts()):
+					the_post();
+			?>	
+			<div class="category-container clearfix">
+				<?php the_title(); ?>
+				<?php the_content(); ?>
+			</div>
 
-		<?php 
-			endwhile;
-			endif; 
-		?>
+			<?php 
+				endwhile;
+				endif; 
+			?>
+			<!-- TABLE-OUTPUT -->
+			<!--Выведем таблицы из мета поля -->
+			<?php
+			//получаем значения из мета поля
+			$meta_values = get_post_meta( $post->ID, 'product_tables_ids', true );
+			//првоерим значение мета данных, если все ок, продолжаем фанится
+			if ( $meta_values != '' )
+			{
+				global $wpdb; //объявим сразу
+				// переведем айдишники мета данных в массив
+				$table_arr = explode(',', $meta_values);
+				//для каждого элемента выведем талицу
+				for ( $i_main = 0; $i_main < count($table_arr); $i_main++ )
+				{
+					$table_id = $table_arr[$i_main];
+					//лежит в функциях
+					$Model = new productTableModel(); 
+					//проверим наличие таблицы
+					$is_table = $Model->is_table($table_id);
+
+					//если все ок, и таблица найдена, то получаем данные
+					if ( $is_table )
+					{	
+						//данные таблицы из бд
+						$table_data = $Model->get_table_data($table_id);
+						//а тут уже данные о товарах из бд
+						$tovars = $Model->get_tovars($table_id);
+						$table_name = $table_data['name']; // переменная имени таблицы, можешь ее использовать
+						// вьюха таблицы
+						$Model->view_table($table_data, $tovars);
+					}
+				}
+			}
+			?>
+			<!-- END OF TABLE OUTPUT -->
+		</div>
 	</div>
-	123
 </main> 
 <?php get_footer(); ?>

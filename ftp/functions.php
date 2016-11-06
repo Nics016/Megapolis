@@ -32,6 +32,10 @@ function _s_scripts()
 	wp_deregister_script('jquery');
 	wp_register_script('jquery',  get_template_directory_uri(). '/js/jquery.js');
 	wp_enqueue_script('jquery');
+
+	//функция для вывода вкладок таблиц
+	wp_register_script('table_tabs',  get_template_directory_uri(). '/js/table_tabs.js');
+	wp_enqueue_script('table_tabs', get_template_directory_uri(). '/js/table_tabs.js', array('jquery'));
 }
 
 add_action('wp_enqueue_scripts', '_s_scripts');

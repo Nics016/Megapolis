@@ -446,8 +446,8 @@ main .container{
 /* CONTENT */
 .content{
 	display: block;
-	float: left;
 	overflow: hidden;
+	float: left;
 	width: 860px;
 	padding-left: 50px;
 }	
@@ -461,4 +461,13 @@ main .container{
 
 .content-text{
 	display: block;
+}
+
+/* TABLE */
+.table-text-elements:first-child{
+	margin-top: 0;
+}
+
+.table-text-elements{
+	margin-top: 50px;
 }

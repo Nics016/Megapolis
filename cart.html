@@ -19,8 +19,8 @@
 				<div class="cart-items">
 					<table id="cart-items-table">
 						<tr>
-							<th>Товары</th>
 							<th></th>
+							<th>Товар</th>
 							<th>Цена</th>
 							<th>Количество</th>
 							<th>Сумма</th>
@@ -30,7 +30,7 @@
 							<td><span class="cart-items-table-pic"></span></td>
 							<td>Арматура А1 6 мм</td>
 							<td>9 руб.</td>
-							<td>4</td>
+							<td><input type="number" class="cart-items-table-num" value="1" min="1" max="10000" step="1"></td>
 							<td>36 руб.</td>
 							<td> <a href="#" class="cart-items-table-delete">Удалить</a></td>
 						</tr>
@@ -47,11 +47,43 @@
 				<span class="contactForm-title">
 					Информация о покупателе
 				</span>
-				<label for="customer_Name_id" class="contactForm-lab">
-					Ф.И.О
-				</label>
-				<input type="text" name="customer_Name" id="customer_Name_id" class="contactForm-field">
-				<input type="submit" class="cart-orderinfo-makeorder" value="Оформить заказ"></a>
+				<div class="contactForm-info">
+					<!-- NAME -->
+					<div class="contactForm-info-line clearfix">
+						<label for="customer_Name_id" class="contactForm-info-lab">
+						Ф.И.О <span class="contactForm-info-star">*</span>
+						</label>
+						<input type="text" name="customer_name" id="customer_Name_id" class="contactForm-info-field" placeholder="Иванов Иван Васильевич">
+					</div>
+
+					<!-- EMAIL -->
+					<div class="contactForm-info-line clearfix">
+						<label for="customer_email_id" class="contactForm-info-lab">
+						E-Mail <span class="contactForm-info-star">*</span>
+						</label>
+						<input type="text" name="customer_email" id="customer_email_id" class="contactForm-info-field" placeholder="ivanov@gmail.com">
+					</div>
+
+					<div class="contactForm-info-line clearfix">
+						<label for="customer_phone_id" class="contactForm-info-lab">
+						Телефон <span class="contactForm-info-star">*</span>
+						</label>
+						<input type="text" name="customer_phone" id="customer_phone_id" class="contactForm-info-field" placeholder="8-999-777-69-69">
+					</div>
+
+					<div class="contactForm-info-line clearfix">
+						<label for="customer_address_id" class="contactForm-info-lab">Адрес доставки</label>
+						<input type="text" name="customer_address" id="customer_address_id" class="contactForm-info-field" placeholder="г. Москва, ул. Шоссейная, д.5">
+					</div>
+
+					<div class="contactForm-info-line clearfix">
+						<label for="customer_comment_id" class="contactForm-info-lab">
+						Комментарий
+						</label>
+						<textarea rows="3" type="textarea" name="customer_comment" id="customer_comment_id" class="contactForm-info-field" placeholder="Оставьте ваш комментарий"></textarea>
+					</div>
+					<input type="submit" class="contactForm-info-makeorder" value="Оформить заказ"></a>
+				</div>
 			</form>
 
 		</div>
