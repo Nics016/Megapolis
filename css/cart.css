@@ -6,16 +6,19 @@
 #cart-items-table{
 	display: block;
 	border-collapse: collapse;
-}
-
-#cart-items-table th{
 	font-size: 18px;
-	color: ;
+}
+
+#cart-items-table th:last-child {
+	margin-right: 0;
 }
 
 #cart-items-table th{
-	padding-right: 30px;
-	border-bottom: 2px solid #686868;
+	font-family: NarrowSansBold;
+    text-align: center;
+    font-size: 18px;
+    padding: 10px 20px;
+    border: 1px solid black;
 }
 
 #cart-items-table td:nth-child(2) {
@@ -23,16 +26,23 @@
 	font-style: NarrowRegularBold;
 }
 
+#cart-items-table td{
+    font-size: 16px;
+    text-align: center;
+    border: 1px solid black;
+    padding: 0px 20px;
+}
+
 .cart-items-table-num{
-	width: 30px;
+	width: 50px;
 }
 
 .cart-items-table-pic{
 	display: block;
 	background: url("http://megapolis-mck.ru/wp-content/themes/megapolis/img/menu_1.png	") no-repeat;
-	height: 32px;
-	width: 32px;
-	background-size: cover;
+	height: 80px;
+	width: 90px;
+	background-size: contain;
 }
 
 
@@ -43,7 +53,7 @@
 
 .cart-orderinfo{
 	display: block;
-	margin-left: 330px;
+	margin-left: 490px;
 	margin-top: 20px;
 	font-size: 20px;
 	font-style: NarrowRegularBold;
@@ -51,7 +61,9 @@
 
 .contactForm{
 	display: block;
+	border: 1px dashed #AAA;
 	margin-top: 50px;
+	padding: 20px;
 }
 
 .contactForm-title{
@@ -68,7 +80,8 @@
 
 .contactForm-info-line{
 	display: block;
-	margin-top: 15px;
+	margin-top: 10px;
+	margin-left: 80px;
 }
 
 .contactForm-info-lab{
@@ -83,33 +96,42 @@
 	font-size: 22px;
 }
 
+.contactForm-info-field:focus{
+	background-color: #DDD;
+	outline:  none;
+}
+
 .contactForm-info-field{
 	display: block;
 	float: left;
+	background-color: #EAEAEA;
+	border: 1px solid #AAA;
+	border-radius: 5px;
+	padding: 10px;
+	letter-spacing: 1px;
 	font-size: 18px;
 	width: 400px;
 }
 
-.contactForm-info-makeorder{
-	display: block;
-	margin-top: 30px;
-}
-
 .contactForm-info-makeorder:hover{
-	background-color: #0274BB;
+	background-image: url("../ftp/img/submit_bg_hover.png");
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .contactForm-info-makeorder{
 	display: block;
 	margin-top: 50px;
-	margin-left: 460px;
-	width: 150px;
-	height: 50px;
-	background-color: #068CDE;
+	margin-left: 550px;
+	width: 170px;
+	height: 60px;
+	background: url("../ftp/img/submit_bg.png") no-repeat;
+	background-size: cover;
 	border-radius: 5px;
-	font-size: 18px;
+	font-size: 20px;
 	font-family: NarrowRegularBold;
+	font-weight: bolder;
 	outline: none;
 	color: #fff;
-	transition: background-color .3s ease-in;
+	transition: background-image .3s ease-in,
+				box-shadow .3s ease-in;
 }

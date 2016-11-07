@@ -34,8 +34,12 @@ function _s_scripts()
 	wp_enqueue_script('jquery');
 
 	//функция для вывода вкладок таблиц
-	wp_register_script('table_tabs',  get_template_directory_uri(). '/js/table_tabs.js');
-	wp_enqueue_script('table_tabs', get_template_directory_uri(). '/js/table_tabs.js', array('jquery'));
+	wp_register_script('table_tabs',  get_template_directory_uri(). '/js/table_tabs.js', array('jquery'));
+	wp_enqueue_script('table_tabs');
+
+	//функицонал добавления товаров в корзину и измения суммы
+	wp_register_script('tovar_tables',  get_template_directory_uri(). '/js/tovar_tables.js', array('jquery', 'table_tabs'));
+	wp_enqueue_script('tovar_tables');
 }
 
 add_action('wp_enqueue_scripts', '_s_scripts');
@@ -223,6 +227,124 @@ class productTableModel
 		require('templates/table_view_template.php');
 	}
 }
+
+//функция для вывода перменных, удобно
+function dd(...$vars)
+{
+	for( $i = 0; $i < count($vars); $i++ )
+	{
+		echo '<pre>';
+		var_dump($vars[$i]);
+		echo '</pre>';
+	}
+}
+
+
+
+//Функции для безопасности
+function csrf()
+{
+	if ( isset($_SESSION['csrf_token']) )
+		return $_SESSION['csrf_token'];
+	else
+	{
+		$upper_chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		$lower_chars = 'abcdefghijklmnopqrstuvwxyz';
+		$ciphers = '1234567890';
+		$specchars = '@\%^_-=+';
+		$string = $upper_chars . $lower_chars . $ciphers . $specchars;
+		$hash = '';
+
+		//Формируем рандомный хеш
+		for ( $i = 0; $i <= 32; $i++ )
+		{
+			$random = rand( 0, strlen($string) - 1 );
+			$hash .= $string[$random];
+		}
+
+		$hash = md5($hash);
+		$_SESSION['csrf_token'] = $hash;
+	}
+}
+
+//аякс добавление товаров в корзину
+add_action('wp_ajax_add_cart', 'add_cart');
+add_action('wp_ajax_nopriv_add_cart', 'add_cart');
+
+function add_cart()
+{
+	session_start();
+	
+	//обозначим перменные
+	$tovar_id = $_POST['tovar_id'];
+	$num = $_POST['num'];
+	$csrf = $_POST['csrf'];
+
+	//проверим csrf защиту
+	if ( $csrf == csrf() )
+	{
+		//проверим на регулярку товар и количество
+		$pattern = '/^[0-9]+$/';
+		if ( preg_match($pattern, $tovar_id) && preg_match($pattern, $num) )
+		{
+
+			//теперь проверим наличие товара
+			global $wpdb;
+			$query = "SELECT price FROM tovars WHERE ID = $tovar_id LIMIT 1";
+			$result = $wpdb->get_results($query, 'ARRAY_A');
+
+			if ( $result )
+			{
+
+				//теперь проверим наш массив
+				if ( isset($_SESSION['cart']) )
+				{
+					//переменная, которая указывает, есть ли в массиве данный айди товара
+					$has_tovar = false;
+
+					//переберем массив, все узнаем
+					for ( $i = 0; $i < count($_SESSION['cart']); $i++ )
+					{
+
+						//проверим, есть ли такой товар у нас
+						if ( $_SESSION['cart'][$i][0] == $tovar_id )
+						{
+							//если да, то изменим его количество и изменим переменную has_tovar
+							$_SESSION['cart'][$i][1] = $num;
+							$has_tovar = true;
+						}
+
+					}
+
+					//если товара нет в массиве, то создадим
+					if ( !$has_tovar )
+					{
+						$_SESSION['cart'][] = [$tovar_id, $num];
+					}
+
+					dd($_SESSION['cart']);
+
+				}
+				else
+				{
+					//если нет, не беда, создадим
+					$_SESSION['cart'] = [];
+					$_SESSION['cart'][] = [$tovar_id, $num];
+
+					dd($_SESSION['cart']);
+
+				}
+
+			}
+
+		}
+
+
+	}
+
+	wp_die();
+}
+
 
 // --- END OF CUSTOM FUNCTIONS ---
 

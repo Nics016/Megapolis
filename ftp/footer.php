@@ -56,6 +56,8 @@
 			</div>
 		</div>
 	</footer>
+
+	<input type="hidden" id="csrf" name="csrf" value="<?= csrf() ?>">
 </div>	
 </body>
 </html>

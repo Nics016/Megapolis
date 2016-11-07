@@ -6,7 +6,7 @@ function set_tabs_click_events(){
 
 	// задаем функции при клике на вкладку
 	$(".table-tabs-element").each(function( i ){
-			$(this).click(function(){
+			$(this).bind("click", function(){
 				click_element(i);
 			});
 		});
@@ -35,7 +35,7 @@ function click_element(element_id){
 	$("table").addClass("table-hidden");
 	$("table:eq(" + element_id + ")").removeClass("table-hidden");
 
-	//наконец, задаем стили для вкладок, чтобы кликнутая была выделена
+	// наконец, задаем стили для вкладок, чтобы кликнутая была выделена
 	$(".table-tabs-element").removeClass("table-element-picked");
 	$(".table-tabs-element:eq(" + element_id + ")").addClass("table-element-picked");
 }

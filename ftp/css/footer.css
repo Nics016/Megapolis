@@ -15,10 +15,15 @@ footer .container{
 	margin-top: 50px;
 }
 
+footer a:hover{
+	color: red;
+}
+
 footer a{
 	display: block;
 	color: #fff;
 	text-decoration: none;
+	transition: color .3s ease-in;
 }
 
 .footer-categories{

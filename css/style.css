@@ -461,4 +461,5 @@ main .container{
 
 .content-text{
 	display: block;
+	overflow: hidden;
 }

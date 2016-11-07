@@ -171,6 +171,7 @@ main .container{
 #top-nav-list li a:hover{
 	background-color: #F41C1C;
 	border: 1px solid #F41C1C;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 #top-nav-list li a{
@@ -183,7 +184,8 @@ main .container{
 	border-radius: 5px;
 	margin: 0 3px;
 	transition: background-color .3s ease-in,
-							border-color .3s ease-in;
+				border-color .3s ease-in,
+				box-shadow .3s ease-in;
 }
 
 /* LEFT-NAV */
@@ -250,6 +252,7 @@ main .container{
 	margin: -55px 0 0 225px;
 	display: none;
 	list-style-type: none;
+	z-index: 10;
 }
 
 #menu-menu-in-left-sidebar li:hover ul {
@@ -446,10 +449,9 @@ main .container{
 /* CONTENT */
 .content{
 	display: block;
-	overflow: hidden;
 	float: left;
 	width: 860px;
-	padding-left: 50px;
+	margin-left: 50px;
 }	
 
 .content-title{

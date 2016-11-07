@@ -63,7 +63,6 @@
 			<div id="table-tabs-id" class="table-tabs clearfix">
 			</div>
 			<!-- END OF TABLE-TABS -->
-
 			<!-- TABLE-OUTPUT -->
 			<!--Выведем таблицы из мета поля -->
 			<?php
@@ -103,7 +102,6 @@
 			}
 			?>
 			<!-- END OF TABLE OUTPUT -->
-			<?php  ?>
 		</div>
 		<!-- END OF CONTENT -->
 	</div>

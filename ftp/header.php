@@ -1,12 +1,28 @@
+<?php
+	session_start();
+
+	//возьмем данные с корзины
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<title>Мегаполис</title>
 	<?php wp_head(); ?>
+
+	<script>
+		
+		var ajaxUrl = '<?= site_url() ?>/wp-admin/admin-ajax.php';
+
+		//массив, где будут хранится данные о товарах в корзине
+		// в нем буду еще массивы, в кторых первый элемент это айди, второй элемент количество товаров, третий его цена
+		var cart = [];
+	</script>
 </head>
 <body>
 <div id="main-wrap">
+
 	<!-- HEADER -->
 	<header id="main-header">
 		<!-- CONTACT INFORMATION -->
@@ -40,10 +56,14 @@
 						В Вашей корзине
 					</span>
 					<span class="main-header-cart-inyourcart-items">
-						товаров: <span class="main-header-cart-inyourcart-itemsNum" id="itemsNum">0</span> 
+						товаров: <span class="main-header-cart-inyourcart-itemsNum" data-type="tovars-num" id="itemsNum">0</span> 
 					</span>
 					<span class="main-header-cart-inyourcart-items">
-						на сумму: <span class="main-header-cart-inyourcart-itemsNum" id="itemsSum">0 руб.</span> 
+						на сумму: 
+						<span class="main-header-cart-inyourcart-itemsNum" id="itemsSum">
+							<span data-type="tovars-sum">0</span>
+							руб. 
+						</span>
 					</span>
 				</a>
 			</div>
