@@ -1,9 +1,16 @@
+.table-container{
+	display: block;
+	float: left;
+	width: 860px;
+	padding-left: 50px;
+}	
+
 .table-title{
 	display: block;
 	text-transform: uppercase;
 	font-family: NarrowSansBold;
 	font-size: 32px;
-	color: #566473; 
+	color: #566473;
 }
 
 .table-text{
@@ -14,7 +21,6 @@
 }
 
 .table-text-elements{
-	display: block;
 	border-collapse: collapse;
 }
 
@@ -113,4 +119,15 @@
 
 .table-element-picked{
 	border: 2px solid #E13F3F;
+}
+
+#add-cart-modal{
+	display: none;
+	left: calc((100vw - 128px)/2);
+	width: 128px;
+	height: 128px;
+	position: absolute;
+	z-index: 100;
+	background: url('../img/add_basket.png') no-repeat;
+	background-size: cover;
 }

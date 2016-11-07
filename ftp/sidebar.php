@@ -2,7 +2,10 @@
  
 	<div id="left-sideb" class="sidebar">
  
-		<?php dynamic_sidebar( 'left_sideb' ); ?>
+		<?php 
+			
+			dynamic_sidebar( 'left_sideb' ); 
+		?>
  
 	</div>
  

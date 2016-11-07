@@ -16,7 +16,9 @@ function _s_styles()
 	wp_register_style('footer', get_template_directory_uri(). '/css/footer.css');
 	wp_enqueue_style('footer', get_template_directory_uri(). '/css/footer.css');
 	wp_register_style('category-articles', get_template_directory_uri(). '/css/category-articles.css');
-	wp_enqueue_style('category-articles', get_template_directory_uri(). '/css/category-articles');
+	wp_enqueue_style('category-articles', get_template_directory_uri(). '/css/category-articles.css');
+	wp_register_style('cart', get_template_directory_uri(). '/css/cart.css');
+	wp_enqueue_style('cart', get_template_directory_uri(). '/css/cart.css');
 
 	wp_register_style('fontawesome', get_template_directory_uri(). '/font-awesome/css/font-awesome.min.css');
 	wp_enqueue_style('fontawesome', get_template_directory_uri(). '/font-awesome/css/font-awesome.min.css');
@@ -33,13 +35,29 @@ function _s_scripts()
 	wp_register_script('jquery',  get_template_directory_uri(). '/js/jquery.js');
 	wp_enqueue_script('jquery');
 
-	//функция для вывода вкладок таблиц
-	wp_register_script('table_tabs',  get_template_directory_uri(). '/js/table_tabs.js', array('jquery'));
-	wp_enqueue_script('table_tabs');
+	if ( !is_page('cart') )
+	{
+		//функция для вывода вкладок таблиц
+		wp_register_script('table_tabs',  get_template_directory_uri(). '/js/table_tabs.js', array('jquery'));
+		wp_enqueue_script('table_tabs');
 
-	//функицонал добавления товаров в корзину и измения суммы
-	wp_register_script('tovar_tables',  get_template_directory_uri(). '/js/tovar_tables.js', array('jquery', 'table_tabs'));
-	wp_enqueue_script('tovar_tables');
+		//функция таблицы товаров
+		wp_register_script('tovar_tables',  get_template_directory_uri(). '/js/tovar_tables.js', array('jquery', 'table_tabs'));
+		wp_enqueue_script('tovar_tables');
+	}
+
+
+	if ( is_page('cart') )
+	{
+		//валидация формы корзины
+		wp_register_script('cart_form_validation',  get_template_directory_uri(). '/js/cart_form_validation.js', array('jquery'));
+		wp_enqueue_script('cart_form_validation');
+
+		//для таблицы корзины
+		wp_register_script('cart_table',  get_template_directory_uri(). '/js/cart_table.js', array('jquery'));
+		wp_enqueue_script('cart_table');
+
+	}
 }
 
 add_action('wp_enqueue_scripts', '_s_scripts');
@@ -228,6 +246,7 @@ class productTableModel
 	}
 }
 
+
 //функция для вывода перменных, удобно
 function dd(...$vars)
 {
@@ -238,7 +257,6 @@ function dd(...$vars)
 		echo '</pre>';
 	}
 }
-
 
 
 //Функции для безопасности
@@ -254,18 +272,17 @@ function csrf()
 		$specchars = '@\%^_-=+';
 		$string = $upper_chars . $lower_chars . $ciphers . $specchars;
 		$hash = '';
-
 		//Формируем рандомный хеш
 		for ( $i = 0; $i <= 32; $i++ )
 		{
 			$random = rand( 0, strlen($string) - 1 );
 			$hash .= $string[$random];
 		}
-
 		$hash = md5($hash);
 		$_SESSION['csrf_token'] = $hash;
 	}
 }
+
 
 //аякс добавление товаров в корзину
 add_action('wp_ajax_add_cart', 'add_cart');
@@ -279,7 +296,6 @@ function add_cart()
 	$tovar_id = $_POST['tovar_id'];
 	$num = $_POST['num'];
 	$csrf = $_POST['csrf'];
-
 	//проверим csrf защиту
 	if ( $csrf == csrf() )
 	{
@@ -288,50 +304,134 @@ function add_cart()
 		if ( preg_match($pattern, $tovar_id) && preg_match($pattern, $num) )
 		{
 
-			//теперь проверим наличие товара
+			settype($num, 'integer');
+
+			//проверем количество товара
+			if ( $num > 0 )
+			{
+				//теперь проверим наличие товара
+				global $wpdb;
+				$query = "SELECT price FROM tovars WHERE ID = $tovar_id LIMIT 1";
+				$result = $wpdb->get_results($query, 'ARRAY_A');
+				if ( $result )
+				{
+					//теперь проверим наш массив
+					if ( isset($_SESSION['cart']) )
+					{
+						//переменная, которая указывает, есть ли в массиве данный айди товара
+						$has_tovar = false;
+						$price = $result[0]['price'];
+
+						//переберем массив, все узнаем
+						for ( $i = 0; $i < count($_SESSION['cart']); $i++ )
+						{
+							//проверим, есть ли такой товар у нас
+							if ( $_SESSION['cart'][$i][0] == $tovar_id )
+							{
+								//если да, то изменим его количество и изменим переменную has_tovar
+								$_SESSION['cart'][$i][1] = $num;
+								$_SESSION['cart'][$i][2] = $price;
+								$has_tovar = true;
+							}
+						}
+						//если товара нет в массиве, то создадим
+						if ( !$has_tovar )
+						{
+							$_SESSION['cart'][] = [$tovar_id, $num, $price];
+						}
+						dd($_SESSION['cart']);
+					}
+					else
+					{
+						//если нет, не беда, создадим
+						$_SESSION['cart'] = [];
+						$_SESSION['cart'][] = [$tovar_id, $num];
+						dd($_SESSION['cart']);
+					}
+				}
+			}
+		}
+	}
+	wp_die();
+}
+
+
+//удаление товара из корзины
+
+add_action('wp_ajax_remove_cart', 'remove_cart');
+add_action('wp_ajax_nopriv_remove_cart', 'remove_cart');
+
+function remove_cart()
+{
+
+	session_start();
+
+	$tovar_id = $_POST['tovar_id'];
+	$csrf = $_POST['csrf'];
+
+	//проверим csrf защиту
+	if ( $csrf == csrf() )
+	{
+
+		//проверим на регулярку товар и количество
+		$pattern = '/^[0-9]+$/';
+		if ( preg_match($pattern, $tovar_id) )
+		{
+
+			//проверяем товара по дб и на всякий случай проверим сессию
 			global $wpdb;
 			$query = "SELECT price FROM tovars WHERE ID = $tovar_id LIMIT 1";
 			$result = $wpdb->get_results($query, 'ARRAY_A');
 
-			if ( $result )
+			if ( $result && isset($_SESSION['cart']) )
 			{
 
-				//теперь проверим наш массив
-				if ( isset($_SESSION['cart']) )
+				//приведем все к числому виду
+				settype($tovar_id, 'integer');
+				settype($price, 'integer');
+
+				//удалим из массива нужную строку
+				for ( $i = 0; $i < count($_SESSION['cart']); $i++ )
 				{
-					//переменная, которая указывает, есть ли в массиве данный айди товара
-					$has_tovar = false;
-
-					//переберем массив, все узнаем
-					for ( $i = 0; $i < count($_SESSION['cart']); $i++ )
+					//проверим, есть ли такой товар у нас
+					if ( $_SESSION['cart'][$i][0] == $tovar_id )
 					{
+						
+						//найдем общую сумму товар и удалим его
+						$num = $_SESSION['cart'][$i][1];
+						$price = $_SESSION['cart'][$i][2];				
+						$sum = $num * $price;
 
-						//проверим, есть ли такой товар у нас
-						if ( $_SESSION['cart'][$i][0] == $tovar_id )
-						{
-							//если да, то изменим его количество и изменим переменную has_tovar
-							$_SESSION['cart'][$i][1] = $num;
-							$has_tovar = true;
-						}
+						//удаляем массив
+						unset($_SESSION['cart'][$i]);
+						$_SESSION['cart'] = array_values($_SESSION['cart']);						
 
 					}
-
-					//если товара нет в массиве, то создадим
-					if ( !$has_tovar )
-					{
-						$_SESSION['cart'][] = [$tovar_id, $num];
-					}
-
-					dd($_SESSION['cart']);
-
+				
 				}
-				else
-				{
-					//если нет, не беда, создадим
-					$_SESSION['cart'] = [];
-					$_SESSION['cart'][] = [$tovar_id, $num];
 
-					dd($_SESSION['cart']);
+
+				//проверим, все ли посчиталось
+				if (isset($sum))
+				{
+					//проверим,может послдений товар
+					if (empty($_SESSION['cart']))
+					{
+						$response = [
+							'status' => 'empty'
+						];
+
+						echo json_encode($response);
+					}
+					else
+					{
+						$response = [
+							'status' => 'ok',
+							'sum' => $sum
+						];
+						
+						echo json_encode($response);
+					}
 
 				}
 
@@ -339,12 +439,57 @@ function add_cart()
 
 		}
 
-
 	}
+
 
 	wp_die();
 }
 
+//изменние количества товаров
+add_action('wp_ajax_change_cart_num', 'change_cart_num');
+add_action('wp_ajax_nopriv_change_cart_num', 'change_cart_num');
+
+function change_cart_num()
+{
+	session_start();
+
+	$tovar_id = $_POST['tovar_id'];
+	$num = $_POST['num'];
+	$csrf = $_POST['csrf'];
+
+	//проверим csrf защиту
+	if ( $csrf == csrf() )
+	{
+		//проверим на регулярку товар и количество
+		$pattern = '/^[0-9]+$/';
+		if ( preg_match($pattern, $tovar_id) && preg_match($pattern, $num) )
+		{
+			//проверим количество и массив товаров
+			if ( $num > 0 && isset($_SESSION['cart']) )
+			{
+
+				//приведем все к числому виду
+				settype($tovar_id, 'integer');
+				settype($num, 'integer');
+
+				//удалим из массива нужную строку
+				for ( $i = 0; $i < count($_SESSION['cart']); $i++ )
+				{
+					//проверим, есть ли такой товар у нас
+					if ( $_SESSION['cart'][$i][0] == $tovar_id )
+					{	
+						//изменим количество товара
+						$_SESSION['cart'][$i][1] = $num;
+					}
+				
+				}
+
+			}
+		}
+	}
+
+	wp_die();
+}
 
 // --- END OF CUSTOM FUNCTIONS ---
 

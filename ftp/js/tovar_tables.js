@@ -1,5 +1,23 @@
 jQuery(document).ready(function($){
 
+
+	//функция показа модалки
+	function showModal()
+	{
+
+		var scrollTop = $(window).scrollTop();
+		var marginHeight = (window.innerHeight - 128)/2 + scrollTop;
+
+		$('#add-cart-modal').css({'top': marginHeight});
+		$('#add-cart-modal').fadeIn(500);
+
+		setTimeout(function(){
+			$('#add-cart-modal').fadeOut(500);
+		}, 500);
+
+	}
+
+
 	//по изменению количества товара сделаем измения суммы
 	var tovarNum = $('input[data-type="tovar-num"]');
 	tovarNum.bind('change', function(){
@@ -8,7 +26,7 @@ jQuery(document).ready(function($){
 		var value = +$(this).val();
 		
 		//проверим, не отрицательное ли оно
-		if ( value >= 0 )
+		if ( value > 0 )
 		{
 			//берем значение сцммы товара
 			var parent = $(this).closest('tr');
@@ -17,6 +35,11 @@ jQuery(document).ready(function($){
 			//увеличиваем общую сумму
 			var sum = price * value;
 			parent.children('td').children('span[data-type="tovar-sum"]').text(sum);
+		}
+		else
+		{
+			$(this).val(1);
+			tovarNum.change();
 		}
 
 	});
@@ -34,60 +57,75 @@ jQuery(document).ready(function($){
 		var num = +parent.children('td').children('input[data-type="tovar-num"]').val();
 		var price = +parent.children('td').children('span[data-type="tovar-price"]').html();
 
-		//переменная, которая указывает, есть ли в массиве данный айди товара
-		var hasTovar = false;
+		//для првоерки
+		var pattern = /^[0-9]+$/;
 
-		//переберем массив, все узнаем
-		for ( var i = 0; i < cart.length; i++ )
+
+		//проверим все данные
+		if ( 
+				pattern.test(tovarId) && pattern.test(num) && pattern.test(price)
+				&& tovarId > 0 && num > 0 && price > 0
+		   )
+
 		{
+			//переменная, которая указывает, есть ли в массиве данный айди товара
+			var hasTovar = false;
 
-			//проверим, есть ли такой товар у нас
-			if ( cart[i][0] == tovarId )
+			//переберем массив, все узнаем
+			for ( var i = 0; i < cart.length; i++ )
 			{
-				//если да, то изменим его количество и изменим переменную hasTovar
-				cart[i][1] = num;
-				hasTovar = true;
+
+				//проверим, есть ли такой товар у нас
+				if ( cart[i][0] == tovarId )
+				{
+					//если да, то изменим его количество и изменим переменную hasTovar
+					cart[i][1] = num;
+					hasTovar = true;
+				}
+
 			}
 
+			//если товара нет в массиве, то создадим
+			if ( !hasTovar )
+			{
+				var tovarArr = [ tovarId, num, price ];
+				cart.push(tovarArr);
+			}
+
+			//теперь изменим в корзине колифчество товаров и обущу сумму
+
+			//сколько всего товаров
+			var count = cart.length;
+
+			//подсчитаем цену
+			var totalSum = 0;
+			for ( var i = 0; i < cart.length; i++ )
+			{
+				totalSum += cart[i][1] * cart[i][2];
+			}
+
+			//изменим вывод в корзине
+			$('#main-header span[data-type="tovars-num"]').text(count);
+			$('#main-header span[data-type="tovars-sum"]').text(totalSum);
+
+			//покажем анимацию
+			showModal();
+
+			//возьмем csrf
+			var csrf = $('#csrf').val();
+
+			// формируем данные для аякса
+			var data = 'action=add_cart' + '&tovar_id=' + tovarId
+						+ '&num=' + num + '&csrf=' + csrf;
+
+			//делаем аякс запрос
+			$.ajax({
+				url: ajaxUrl,
+				type: 'POST',
+				data: data
+			});
+
 		}
-
-		//если товара нет в массиве, то создадим
-		if ( !hasTovar )
-		{
-			var tovarArr = [ tovarId, num, price ];
-			cart.push(tovarArr);
-		}
-
-		//теперь изменим в корзине колифчество товаров и обущу сумму
-
-		//сколько всего товаров
-		var count = cart.length;
-
-		//подсчитаем цену
-		var totalSum = 0;
-		for ( var i = 0; i < cart.length; i++ )
-		{
-			totalSum += cart[i][1] * cart[i][2];
-		}
-
-		//изменим вывод в корзине
-		$('#main-header span[data-type="tovars-num"]').text(count);
-		$('#main-header span[data-type="tovars-sum"]').text(totalSum);
-
-		//возьмем csrf
-		var csrf = $('#csrf').val();
-
-		// формируем данные для аякса
-		var data = 'action=add_cart' + '&tovar_id=' + tovarId
-					+ '&num=' + num + '&csrf=' + csrf;
-
-		//делаем аякс запрос
-		$.ajax({
-			url: ajaxUrl,
-			type: 'POST',
-			data: data,
-		});
-
 
 	});
 

@@ -1,13 +1,9 @@
 /* CATEGORIES */
-main.categories_container{
-	width: 1170px;
-	margin: 0 auto;
-}
 
 .categories{
 	display: block;
 	overflow: hidden;
-	width: 1170px;
+	width: 1200px;
 	margin: 0 auto;
 	margin-top: 15px;
 }
@@ -24,7 +20,7 @@ main.categories_container{
 
 .categories-items{
 	display: block;
-	width: 1170px;
+	width: 1200px;
 	margin: 0 auto;
 	margin-top: 15px;
 }
@@ -48,7 +44,7 @@ main.categories_container{
 	filter: grayscale(1);
 	margin-top: 10px;
 	margin-left: 10px;
-	width: 226px;
+	width: 232px;
 	height: 230px;
 	background: url("../img/categoryRawBackground.JPG") no-repeat;
 	background-size: cover;

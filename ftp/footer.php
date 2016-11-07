@@ -58,6 +58,8 @@
 	</footer>
 
 	<input type="hidden" id="csrf" name="csrf" value="<?= csrf() ?>">
+
+	<div id="add-cart-modal"></div>
 </div>	
 </body>
 </html>
