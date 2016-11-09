@@ -34,9 +34,9 @@
 				</span>
 				<hr class="footer-categories-hr">
 				<div class="footer-info-links">
-					<a href="#">О компании</a>
-					<a href="#">Оплата и доставка</a>
-					<a href="#">Акции</a>
+					<a href="http://megapolis-mck.ru/about/">О компании</a>
+					<a href="http://megapolis-mck.ru/dostavka/">Оплата и доставка</a>
+					<a href="http://megapolis-mck.ru/contacts/">Контакты</a>
 				</div>
 			</div>
 			<div class="footer-shopinfo">

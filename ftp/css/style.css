@@ -110,6 +110,7 @@ main .container{
 		margin-left: 5px;
 		color: #425972;
 		font-size: 20px;
+		width: 220px;
 	}
 
 .main-header-cart{
@@ -155,13 +156,16 @@ main .container{
 /* TOP-NAV */
 #top-nav{
 	display: block;
-	width: 1170px;
+	width: 1200px;
 	margin: 0 auto;
 	padding-top: 20px;
+	padding-bottom: 10px;
 }
 
 #top-nav-list{
+	display: block;
 	list-style-type: none;
+	margin: 0 auto;
 }
 
 #top-nav-list li{
@@ -175,6 +179,7 @@ main .container{
 }
 
 #top-nav-list li a{
+	display: block;
 	text-decoration: none;
 	padding: 10px 30px;
 	color: #fff;
@@ -205,13 +210,13 @@ main .container{
 {
 }
 
-#menu-menu-in-left-sidebar{
+#menu-left-menu{
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
 }
 
-#menu-menu-in-left-sidebar li:hover{
+#menu-left-menu li:hover{
 	background-color: #E6E6E6;
 }
 
@@ -225,7 +230,7 @@ main .container{
 	font-family: NarrowSansBold;
 } 
 
-#menu-menu-in-left-sidebar li{
+#menu-left-menu li{
 	margin: 0;
 	margin-bottom: 1px;
 	background-color: #D7D7D7;
@@ -234,20 +239,22 @@ main .container{
 	width: 260px;
 	line-height: 51px; /*! to make vertical align of li a working*/
 	cursor: pointer;
-	background-image: url("../img/menu_1.png");
+/*	background-image: url("../img/menu_1.png");
 	background-repeat: no-repeat;
-	background-size: contain;
+	background-size: contain;*/
 }
 
-#menu-menu-in-left-sidebar li a{
-	padding-left: 68px;
+#menu-left-menu li a{
+	display: block;
+	padding-left: 10px;
+	overflow: hidden;
 	text-decoration: none;
 	font-size: 16px;
 	vertical-align: middle; /* ! */
 	color: #000;
 }
 
-#menu-menu-in-left-sidebar li ul{
+#menu-left-menu li ul{
 	position: absolute;
 	margin: -55px 0 0 225px;
 	display: none;
@@ -255,7 +262,7 @@ main .container{
 	z-index: 10;
 }
 
-#menu-menu-in-left-sidebar li:hover ul {
+#menu-left-menu li:hover ul {
 	display: block;
 }
 
@@ -461,8 +468,26 @@ main .container{
 	color: #566473;
 }
 
+.content-post{
+	display: block;
+	overflow: hidden;
+	width: 100%;
+	margin: 30px 0;
+}
+
+.content-thumbnail{
+	display: block;
+	float: left;
+	margin-bottom: 20px;
+	margin-right: 20px;
+	width: 266px;
+	height: 200px;
+}
+
 .content-text{
 	display: block;
+	float: left;
+	width: 100%;
 }
 
 /* TABLE */
@@ -473,3 +498,4 @@ main .container{
 .table-text-elements{
 	margin-top: 50px;
 }
+

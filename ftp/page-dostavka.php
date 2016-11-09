@@ -1,5 +1,25 @@
 <?php get_header();?>
 <main>
+	<!-- GETTING THEME OPTIONS VARIABLE -->
+	<?php 
+		$var_min = get_theme_mod('input_min', '1'); 
+		$var_max = get_theme_mod('input_max', '20'); 
+		$var_step = get_theme_mod('input_step', '1'); 
+		$var_multiplier = get_theme_mod('input_multiplier', "133");
+		$var_dimension = get_theme_mod('input_dimension', "КМ");
+	?>
+	<!-- END OF GETTING THEME OPTIONS VARIABLE -->
+
+	<script>
+		$(document).ready(function(){
+			// рублей за 1 км
+			var multiplier = <?php echo $var_multiplier; ?>;
+			var dimension = <?php echo '"'.$var_dimension.'"'; ?>;
+			init_range_car(multiplier, dimension); 
+		});
+	</script>
+
+
 	<div class="container clearfix">
 		<?php get_sidebar(); ?>
 		<div class="content">
@@ -59,6 +79,16 @@
 			}
 			?>
 			<!-- END OF TABLE OUTPUT -->
+
+			<!-- CAR SCROLLER -->
+			<div class="car">
+				<input type="range" 
+					   min="<?= $var_min; ?>" 
+					   max="<?= $var_max; ?>" 
+					   step="<?= $var_step; ?>" id="range_car_id">
+				<span class="range_car_text" id="range_car_text_id"></span>
+			</div>
+			<!-- END OF CAR SCROLLER -->
 		</div>
 	</div>
 </main> 

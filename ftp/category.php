@@ -18,7 +18,7 @@
 					<span class="category-title">
 							<?php single_cat_title();?>
 					</span>
-					<div class="category-elements">
+					<div class="category-elements clearfix">
 					<!-- Если у категории есть подкатегории, выводим их: -->
 					<?php if (category_has_children()) { 
 						$terms = get_children_terms($cat);

@@ -31,7 +31,7 @@
 
 			//чтобы перемножать
 			settype($num, 'integer');
-			settype($price, 'integer');
+			settype($price, 'float');
 
 			//для json
 			settype($tovar_id, 'integer');
@@ -57,6 +57,14 @@
 
 
 ?>
+
+<!-- GETTING THEME OPTIONS VARIABLE -->
+<?php 
+	$var_phone = get_theme_mod('input_phone', '8-495-444-77-55'); 
+	$var_phone_subtext = get_theme_mod('input_phone_subtext', 'Общий многоканальный телефон'); 
+	$var_address = get_theme_mod('input_address', 'г. Москва, пр-т Вернадского 62, стр 3'); 
+?>
+<!-- END OF GETTING THEME OPTIONS VARIABLE -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -93,18 +101,18 @@
 				<a href="<?= site_url() ?>" class="main-header-logo-pic"></a>
 			</div>
 			<div class="main-header-phone">
-				<a href="tel:8-495-215-1585" class="main-header-phone-text">
-					8 (495) 215-1585
+				<a href="<?= $var_phone; ?>" class="main-header-phone-text">
+					<?= $var_phone; ?>
 				</a>
 				<i class="fa fa-phone" aria-hidden="true"></i>
 				<span class="main-header-phone-subtext">
-					Общий многоканальный телефон
+					<?= $var_phone_subtext; ?>
 				</span>
 			</div>
 			<div class="main-header-address">
 				<i class="fa fa-location-arrow" aria-hidden="true"></i>
 				<span class="main-header-address-text">
-					 г. Москва, ул. Шаболовка, <br>д. 34, стр. 3
+					 <?= $var_address; ?>
 				</span>
 				<span class="main-header-address-subtext">
 					

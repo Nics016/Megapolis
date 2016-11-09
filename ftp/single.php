@@ -1,24 +1,26 @@
 <?php get_header();?>
 <main>
-	<script>
-		$(document).ready(function(){
-			set_tabs_click_events();
-		});
-	</script>
-
 	<div class="container clearfix">
 		<?php get_sidebar(); ?>
 		<div class="content">
-			<?php
+			<?php 
 				if(have_posts()):
 				while(have_posts()):
-					the_post();
+					the_post();  
 			?>	
 			<span class="content-title">
 				<?php the_title(); ?>
 			</span>
-			<div class="content-text">
-				<?php the_content(); ?>
+			<div class="content-post clearfix">
+					<?php 
+						$img = get_the_post_thumbnail();
+						$sImageUrl = getImageUrl($img); 
+					?>
+				<div class="content-text">
+					<img class="content-thumbnail" 
+					 src="<?= $sImageUrl; ?>">
+					<?php the_content(); ?>
+				</div>
 			</div>
 			<?php 
 				endwhile;
@@ -66,5 +68,30 @@
 			<!-- END OF TABLE OUTPUT -->
 		</div>
 	</div>
+
+	<script>
+		$(document).ready(function(){
+			set_tabs_click_events();
+
+			// если передается запрос "GET" с номером вкладки,
+			// имитируем нажатие этой вкладки
+			var x =	<?php
+				  	if( $_GET["tab"] ) {
+				      echo $_GET['tab'];
+				    }
+				   	else 
+				   		echo "-1";
+				?>;
+			var pattern = new RegExp(/^[0-9]+$/);
+			var numTables = <?php echo count($table_arr); ?>;
+
+			if (pattern.test(x))
+			{
+				if (x > 0 && x <= numTables){
+				click_element(x-1);
+			}
+			}
+		});
+	</script>
 </main> 
 <?php get_footer(); ?>

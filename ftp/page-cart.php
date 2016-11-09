@@ -49,7 +49,7 @@
 
 							//для умножения
 							settype($num, 'integer');
-							settype($price, 'integer');
+							settype($price, 'float');
 
 							$tovar_sum = $price * $num;
 

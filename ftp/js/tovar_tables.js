@@ -24,9 +24,10 @@ jQuery(document).ready(function($){
 
 		//возьмем ЧИСЛЕННОЕ значение
 		var value = +$(this).val();
+		var pattern = /^[0-9]+$/;
 		
 		//проверим, не отрицательное ли оно
-		if ( value > 0 )
+		if ( value > 0 && pattern.test(value) )
 		{
 			//берем значение сцммы товара
 			var parent = $(this).closest('tr');
@@ -63,7 +64,7 @@ jQuery(document).ready(function($){
 
 		//проверим все данные
 		if ( 
-				pattern.test(tovarId) && pattern.test(num) && pattern.test(price)
+				typeof tovarId != 'NaN' && typeof num != 'NaN' && typeof price != 'NaN'
 				&& tovarId > 0 && num > 0 && price > 0
 		   )
 

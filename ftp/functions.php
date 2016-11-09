@@ -19,6 +19,8 @@ function _s_styles()
 	wp_enqueue_style('category-articles', get_template_directory_uri(). '/css/category-articles.css');
 	wp_register_style('cart', get_template_directory_uri(). '/css/cart.css');
 	wp_enqueue_style('cart', get_template_directory_uri(). '/css/cart.css');
+	wp_register_style('slider_input', get_template_directory_uri(). '/css/slider_input.css');
+	wp_enqueue_style('slider_input', get_template_directory_uri(). '/css/slider_input.css');
 
 	wp_register_style('fontawesome', get_template_directory_uri(). '/font-awesome/css/font-awesome.min.css');
 	wp_enqueue_style('fontawesome', get_template_directory_uri(). '/font-awesome/css/font-awesome.min.css');
@@ -44,6 +46,11 @@ function _s_scripts()
 		//функция таблицы товаров
 		wp_register_script('tovar_tables',  get_template_directory_uri(). '/js/tovar_tables.js', array('jquery', 'table_tabs'));
 		wp_enqueue_script('tovar_tables');
+
+		//для бегунка с машинкой
+		//функция таблицы товаров
+		wp_register_script('car_input',  get_template_directory_uri(). '/js/range_car.js', array('jquery'));
+		wp_enqueue_script('car_input');
 	}
 
 
@@ -97,9 +104,12 @@ function register_wp_sidebars() {
 }
 add_action( 'widgets_init', 'register_wp_sidebars' );
 
-// Добавление кнопки добавления миниатюры поста
+// Добавляем кнопку добавления миниатюры поста
 add_theme_support( 'post-thumbnails' );
 
+// Добавляем страничку настроек темы
+require_once("options_page.php");
+	
 
 
 // --- CUSTOM FUNCTIONS ---
@@ -266,20 +276,9 @@ function csrf()
 		return $_SESSION['csrf_token'];
 	else
 	{
-		$upper_chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-		$lower_chars = 'abcdefghijklmnopqrstuvwxyz';
-		$ciphers = '1234567890';
-		$specchars = '@\%^_-=+';
-		$string = $upper_chars . $lower_chars . $ciphers . $specchars;
-		$hash = '';
-		//Формируем рандомный хеш
-		for ( $i = 0; $i <= 32; $i++ )
-		{
-			$random = rand( 0, strlen($string) - 1 );
-			$hash .= $string[$random];
-		}
-		$hash = md5($hash);
-		$_SESSION['csrf_token'] = $hash;
+		$bytes = random_bytes(32);
+		$_SESSION['csrf_token'] = bin2hex($bytes);
+		return $_SESSION['csrf_token'];
 	}
 }
 
@@ -345,7 +344,7 @@ function add_cart()
 					{
 						//если нет, не беда, создадим
 						$_SESSION['cart'] = [];
-						$_SESSION['cart'][] = [$tovar_id, $num];
+						$_SESSION['cart'][] = [$tovar_id, $num, $price];
 						dd($_SESSION['cart']);
 					}
 				}
@@ -493,3 +492,6 @@ function change_cart_num()
 
 // --- END OF CUSTOM FUNCTIONS ---
 
+// --- THUMBNAILS IN MENUS ---
+
+// --- END OF THUMBNAILS IN MENUS ---

@@ -1,5 +1,10 @@
 <?php get_header();?>
 <main>
+	<script>
+		$(document).ready(function(){
+			init_range_car();
+		});
+	</script>
 	<div class="container clearfix">
 		<?php get_sidebar(); ?>
 		<div class="content">
