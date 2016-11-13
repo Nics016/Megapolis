@@ -151,3 +151,23 @@
 	transition: background-image .3s ease-in,
 							box-shadow .3s ease-in;
 }
+
+.checkout-title{
+	display: block;
+	font-size: 24px;
+	color: green;
+	margin-bottom: 30px;
+}
+
+.checkout-title-orderNumber{
+	color: #686868;
+	font-style: italic;
+}
+
+.checkout-thanks{
+	display: block;
+	margin-top: 30px;
+	margin-left: 100px;
+	font-size: 20px;
+	color: red;
+}

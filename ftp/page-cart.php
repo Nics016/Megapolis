@@ -1,10 +1,5 @@
 <?php get_header();?>
 <main>
-	<script>
-		$(document).ready(function(){
-			init_cart_form_validation();
-		});
-	</script>
 	<div class="container clearfix">
 		<?php get_sidebar(); ?>
 		<div class="content">
@@ -99,49 +94,55 @@
 				</div>
 			</div>
 
-			<form class="contactForm" action="page-cart.php" method="post">
+			<form class="contactForm" action="" method="post" id="cart_form">
 				<span class="contactForm-title">
 					Информация о покупателе
 				</span>
 				<div class="contactForm-info">
 					<!-- NAME -->
-					<div class="contactForm-info-line clearfix">
-						<label for="customer_Name_id" class="contactForm-info-lab">
-						Имя <span class="contactForm-info-star">*</span>
-						</label>
-						<input type="text" name="customer_name" id="customer_name_id" class="contactForm-info-field" placeholder="Иванов Иван Васильевич">
+					<div class="input-container">
+						<div class="contactForm-info-line clearfix">
+							<label for="customer_Name_id" class="contactForm-info-lab">
+							Имя <span class="contactForm-info-star">*</span>
+							</label>
+							<input type="text" name="name" id="customer_name_id" class="contactForm-info-field" placeholder="Иванов Иван Васильевич" autocomplete="off">
+						</div>
+						<span class="contactForm-info-error" id="customer_name_id_error">Неверное имя</span>
 					</div>
-					<span class="contactForm-info-error" id="customer_name_id_error">Неверное имя</span>
 
 					<!-- EMAIL -->
-					<div class="contactForm-info-line clearfix">
-						<label for="customer_email_id" class="contactForm-info-lab">
-						E-Mail <span class="contactForm-info-star">*</span>
-						</label>
-						<input type="text" name="customer_email" id="customer_email_id" class="contactForm-info-field" placeholder="ivanov@gmail.com">
+					<div class="input-container">
+						<div class="contactForm-info-line clearfix">
+							<label for="customer_email_id" class="contactForm-info-lab">
+							E-Mail <span class="contactForm-info-star">*</span>
+							</label>
+							<input type="text" name="email" id="customer_email_id" class="contactForm-info-field" placeholder="ivanov@gmail.com" autocomplete="off">
+						</div>
+						<span class="contactForm-info-error" id="customer_email_id_error">Неверный формат e-mail</span>
 					</div>
-					<span class="contactForm-info-error" id="customer_email_id_error">Неверный формат e-mail</span>
-
-					<div class="contactForm-info-line clearfix">
-						<label for="customer_phone_id" class="contactForm-info-lab">
-						Телефон <span class="contactForm-info-star">*</span>
-						</label>
-						<input type="text" name="customer_phone" id="customer_phone_id" class="contactForm-info-field" placeholder="8-999-777-69-69">
-					</div>
-					<span class="contactForm-info-error" id="customer_phone_id_error">Неверный номер телефона</span>
+					
+					<div class="input-container">
+						<div class="contactForm-info-line clearfix">
+							<label for="customer_phone_id" class="contactForm-info-lab">
+							Телефон <span class="contactForm-info-star">*</span>
+							</label>
+							<input type="text" name="phone" id="customer_phone_id" class="contactForm-info-field" placeholder="89997776969" autocomplete="off">
+						</div>
+						<span class="contactForm-info-error" id="customer_phone_id_error">Неверный номер телефона</span>
+					</div>	
 
 					<div class="contactForm-info-line clearfix">
 						<label for="customer_address_id" class="contactForm-info-lab">Адрес доставки</label>
-						<input type="text" name="customer_address" id="customer_address_id" class="contactForm-info-field" placeholder="г. Москва, ул. Шоссейная, д.5">
+						<input type="text" name="adress" class="contactForm-info-field" placeholder="г. Москва, ул. Шоссейная, д.5" autocomplete="off">
 					</div>
 
 					<div class="contactForm-info-line clearfix">
 						<label for="customer_comment_id" class="contactForm-info-lab">
 						Комментарий
 						</label>
-						<textarea rows="3" type="textarea" name="customer_comment" id="customer_comment_id" class="contactForm-info-field" placeholder="Оставьте ваш комментарий"></textarea>
+						<textarea rows="3" type="textarea" name="comment" class="contactForm-info-field" placeholder="Оставьте ваш комментарий" autocomplete="off"></textarea>
 					</div>
-					<input type="submit" class="contactForm-info-makeorder" value="Оформить заказ" id="customer_submit_id"></a>
+					<input type="submit" class="contactForm-info-makeorder" value="Оформить заказ" id="customer_submit_id">
 				</div>
 			</form>
 
@@ -152,7 +153,6 @@
 			<?php endif; ?>
 
 		</div>
-	</div>
 	</div>
 </main> 
 <?php get_footer(); ?>

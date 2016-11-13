@@ -1,10 +1,6 @@
 <?php
 	session_start();
 
-	//расскоментировать для очистки корзины
-	// if ( isset($_SESSION['cart']) )
-	// 	$_SESSION['cart'] = [];
-
 	//перменная о количестве товаро
 	$count = 0;
 
@@ -43,12 +39,13 @@
 
 		}
 
-	}
+		//итоговая сумма
+		if ( is_page('cart') )
+		{
+			global $total;
+			$total = $total_sum;
+		}
 
-	if ( is_page('cart') )
-	{
-		global $total;
-		$total = $total_sum;
 	}
 
 	//формируем json
@@ -101,7 +98,7 @@
 				<a href="<?= site_url() ?>" class="main-header-logo-pic"></a>
 			</div>
 			<div class="main-header-phone">
-				<a href="<?= $var_phone; ?>" class="main-header-phone-text">
+				<a href="tel:<?= $var_phone; ?>" class="main-header-phone-text">
 					<?= $var_phone; ?>
 				</a>
 				<i class="fa fa-phone" aria-hidden="true"></i>

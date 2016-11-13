@@ -83,6 +83,36 @@ function init_main_page_inputs($customizer){
         'type' => 'text',
     )
 	);
+
+    // email-1
+    $customizer->add_setting(
+    'input_email1',
+    array('default' => 'info@megapolis-mck.ru')
+    );
+    // контрол
+    $customizer->add_control(
+    'input_email1',
+    array(
+        'label' => 'E-mail внизу страницы',
+        'section' => 'section_main_page',
+        'type' => 'text',
+    )
+    );
+
+    // email-2
+    $customizer->add_setting(
+    'input_email2',
+    array('default' => 'info@megapolis-mck.ru')
+    );
+    // контрол
+    $customizer->add_control(
+    'input_email2',
+    array(
+        'label' => 'E-mail, на который приходят заказы',
+        'section' => 'section_main_page',
+        'type' => 'text',
+    )
+    );
 }
 
 function init_dostavka_page_inputs($customizer){
@@ -95,7 +125,7 @@ function init_dostavka_page_inputs($customizer){
 	$customizer->add_control(
     'input_min',
     array(
-        'label' => 'Минимальное значение деления',
+        'label' => 'Минимум',
         'section' => 'section_dostavka_page',
         'type' => 'text',
     )
@@ -110,7 +140,7 @@ function init_dostavka_page_inputs($customizer){
 	$customizer->add_control(
     'input_max',
     array(
-        'label' => 'Максимальное значение деления',
+        'label' => 'Максимум',
         'section' => 'section_dostavka_page',
         'type' => 'text',
     )
@@ -125,7 +155,7 @@ function init_dostavka_page_inputs($customizer){
 	$customizer->add_control(
     'input_step',
     array(
-        'label' => 'Делений за шаг',
+        'label' => 'За шаг',
         'section' => 'section_dostavka_page',
         'type' => 'text',
     )
@@ -140,7 +170,7 @@ function init_dostavka_page_inputs($customizer){
 	$customizer->add_control(
     'input_multiplier',
     array(
-        'label' => 'Множитель в рублях',
+        'label' => 'Рублей за 1 шаг',
         'section' => 'section_dostavka_page',
         'type' => 'text',
     )

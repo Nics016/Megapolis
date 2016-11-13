@@ -30,7 +30,7 @@
 
 .table-text-elements th:last-child {
 	margin-right: 0;
-	width: 100px;
+	width: 110px;
 }
 
 .table-text-elements th{
@@ -67,7 +67,7 @@
 
 .table-text-elements-cart{
 	background-color: #E13F3F;
-	padding: 5px 20px;
+	padding: 5px 18px;
 	color: #fff;
 	border-radius: 5px;
 	font-size: 18px;

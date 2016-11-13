@@ -84,7 +84,7 @@ jQuery(document).ready(function($){
 
 
 		//проверим и то и то
-		if ( pattern.test(tovarId) && pattern.test(tovarNum) && tovarId > 0 && tovarNum > 0 )
+		if ( typeof tovarId != 'NaN' && typeof tovarNum != 'NaN' && tovarId > 0 && tovarNum > 0 )
 		{
 			for( var i = 0; i < cart.length; i++ )
 			{	

@@ -1,10 +1,3 @@
-.category-container{
-	display: block;
-	float: left;
-	width: 880px;
-	padding-left: 30px;
-}	
-
 .category-title{
 	display: block;
 	text-transform: uppercase;
@@ -23,7 +16,7 @@
 	background-blend-mode: darken;
 }
 
-.categor-elements-item:first-element{
+.category-elements-item:first-child, .category-elements-item:nth-child(3n+1){
 	margin-left: 0;
 }
 
@@ -32,7 +25,7 @@
 	float: left;
 	outline: none;
 	text-decoration: none;
-	width: 266px;
+	width: 290px;
 	height: 266px;
 	margin-left: 20px;
 	transition: background-color .3s ease-in;
@@ -41,10 +34,14 @@
 .category-elements-item-pic{
 	display: block;
 	height: 200px;
-	width: 100%;
-	background: url("../img/category/armatura.png")
-				no-repeat;
-	background-size: contain;
+	margin-top: 15px;
+}
+
+.category-elements-item-pic-img{
+	display: block;
+	height: 200px;
+	max-width: 290px;
+	margin: 0 auto;
 }
 
 .category-elements-item-text{
@@ -52,7 +49,7 @@
 	color: #686868;
 	text-transform: uppercase;
 	text-align: center;
-	margin-top: 10px;
+	margin-top: 15px;
 	font-size: 18px;
 	font-family: NarrowSansBold;
 }

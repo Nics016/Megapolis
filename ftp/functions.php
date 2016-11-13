@@ -21,6 +21,8 @@ function _s_styles()
 	wp_enqueue_style('cart', get_template_directory_uri(). '/css/cart.css');
 	wp_register_style('slider_input', get_template_directory_uri(). '/css/slider_input.css');
 	wp_enqueue_style('slider_input', get_template_directory_uri(). '/css/slider_input.css');
+	wp_register_style('sidebar', get_template_directory_uri(). '/css/sidebar.css');
+	wp_enqueue_style('sidebar', get_template_directory_uri(). '/css/sidebar.css');
 
 	wp_register_style('fontawesome', get_template_directory_uri(). '/font-awesome/css/font-awesome.min.css');
 	wp_enqueue_style('fontawesome', get_template_directory_uri(). '/font-awesome/css/font-awesome.min.css');
@@ -57,13 +59,19 @@ function _s_scripts()
 	if ( is_page('cart') )
 	{
 		//валидация формы корзины
-		wp_register_script('cart_form_validation',  get_template_directory_uri(). '/js/cart_form_validation.js', array('jquery'));
+		wp_register_script('cart_form_validation',  get_template_directory_uri(). '/js/cart_form_validation.js', array('jquery'), null);
 		wp_enqueue_script('cart_form_validation');
 
 		//для таблицы корзины
 		wp_register_script('cart_table',  get_template_directory_uri(). '/js/cart_table.js', array('jquery'));
 		wp_enqueue_script('cart_table');
 
+	}
+
+	if ( is_page('test') )
+	{
+		wp_register_script('test',  get_template_directory_uri(). '/js/test.js', array('jquery'), null);
+		wp_enqueue_script('test');
 	}
 }
 
@@ -110,7 +118,20 @@ add_theme_support( 'post-thumbnails' );
 // Добавляем страничку настроек темы
 require_once("options_page.php");
 	
+// Shortcode бегунка с машинкой
+function wporg_shortcodes_init()
+{
+    function wporg_shortcode($atts = [], $content = null)
+    {
+        // do something to $content
+ 
+        // always return
+        return $content;
+    }
+    add_shortcode('wporg', 'wporg_shortcode');
+}
 
+add_action('init', 'wporg_shortcodes_init');
 
 // --- CUSTOM FUNCTIONS ---
 // Функции обработки категорий
@@ -321,6 +342,10 @@ function add_cart()
 						$has_tovar = false;
 						$price = $result[0]['price'];
 
+						//для хорошего вывода
+						settype($tovar_id, 'integer');
+						settype($price, 'float');
+
 						//переберем массив, все узнаем
 						for ( $i = 0; $i < count($_SESSION['cart']); $i++ )
 						{
@@ -344,6 +369,10 @@ function add_cart()
 					{
 						//если нет, не беда, создадим
 						$_SESSION['cart'] = [];
+
+						settype($tovar_id, 'integer');
+						settype($price, 'float');
+
 						$_SESSION['cart'][] = [$tovar_id, $num, $price];
 						dd($_SESSION['cart']);
 					}
@@ -387,7 +416,7 @@ function remove_cart()
 
 				//приведем все к числому виду
 				settype($tovar_id, 'integer');
-				settype($price, 'integer');
+				settype($price, 'float');
 
 				//удалим из массива нужную строку
 				for ( $i = 0; $i < count($_SESSION['cart']); $i++ )
@@ -489,6 +518,113 @@ function change_cart_num()
 
 	wp_die();
 }
+
+add_action('wp_ajax_checkout', 'checkout');
+add_action('wp_ajax_nopriv_checkout', 'checkout');
+
+function checkout()
+{	
+	session_start();
+	global $wpdb;
+
+	//остановимс скрипт, если нет сесси
+	if(!isset($_SESSION['cart']) || empty($_SESSION['cart']))
+		exit;
+
+	//регулярки
+	$name_pattern = '/^[а-яА-ЯёЁa-zA-Z ]+$/u';
+	$email_pattern = '/^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/';
+	$phone_pattern = '/^((8|\+7)[\-]?)?(\(?\d{3}\)?[\-]?)?[\d\-]{7,10}$/';
+
+	//подготовим и обезопасим запросы
+	$name = preg_match($name_pattern, $_POST['name']) ? $_POST['name'] : '';
+	$email =  preg_match($email_pattern, $_POST['email']) ? $_POST['email'] : '';
+	$phone = preg_match($phone_pattern, $_POST['phone']) ? $_POST['phone'] : '';
+	$phone = trim($phone);
+	$adress = htmlspecialchars($_POST['adress']);
+	$comment = htmlspecialchars($_POST['comment']);
+	$cart = serialize($_SESSION['cart']);
+
+	//замутим запрос
+	$query = "INSERT INTO tovars_orders ( name, email, phone, adress, commentary, cart ) VALUES ( %s, %s, %s, %s, %s, %s )";
+
+	//формируем массив со значениями
+	$data = [ $name, $email, $phone, $adress, $comment, $cart ];
+
+	//подготовленный запрос
+	$prepare = $wpdb->prepare($query, $data);
+
+	//обновляем бд
+	$insert = $wpdb->query($prepare);
+
+	//если все ок пишем письма и тд
+	if ( $insert )
+	{	
+		$order_id = $wpdb->insert_id;
+
+		if ( $email != '' )
+		{
+
+			//отправляем письмо покупателю 
+			$headers = 'From: Megapolis <info@megapolis-mck.ru>' . "\r\n";
+			$headers .= "Content-type: text/plain; charset=utf-8";
+
+			$message = "Ваш заказ #$order_id принят в обработку! Спасибо за заказ! ";
+			$mail = wp_mail( $email, 'Заказ на сайте megapolis-mck.ru', $message, $headers);
+
+			//отправляем письмо продавцу заголовки те же
+
+			//сформируем письмо
+			$message = "Новый заказ #$order_id\n";
+			$message .= "Имя: $name\n";
+			$message .= "Телефон: $phone\n";
+			$message .= "Email: $email\n";
+
+			//мыло, указанное в настройках
+			$option_mail = get_theme_mod('input_email2', 'info@megapolis-mck.ru');
+
+			$mail = wp_mail( $option_mail, 'Заказ на сайте megapolis-mck.ru', $message, $headers);
+
+			//после почты запишем сессию корзины и айди заказы, чтобы остались данные для страницы checkout
+			$_SESSION['order'] = [
+				'order_info' => $_SESSION['cart'],
+				'order_id' => $order_id
+			];
+
+			//теперь обнулим сессию корины
+			$_SESSION['cart'] = [];
+
+			//возвратим статус успеха
+			echo json_encode([
+				'status' => 'ok'
+			]);
+
+		}
+		
+	}
+	else
+		echo json_encode([
+				'status' => 'fail'
+		]);
+
+	wp_die();
+}
+
+
+add_action('wp_ajax_test', 'test');
+
+function test()
+{
+	global $wpdb;
+	$xss = htmlspecialchars($_POST['value']);
+
+	$insert = $wpdb->query("INSERT INTO test (xss) VALUES ('$xss')");
+
+	echo $wpdb->insert_id;
+
+	wp_die();
+}
+
 
 // --- END OF CUSTOM FUNCTIONS ---
 

@@ -1,102 +1,92 @@
-// --- VAR ---
-// если что-то из этого false, то форма не отправится
+jQuery(document).ready(function($){
+
+
 var validation = {
 	"customer_name_id": false,
 	"customer_email_id": false,
 	"customer_phone_id": false
 }
 
-// классы для отображения ошибки
-var keyup_alert_class = "contactForm-info-error-show";
-var submit_alert_class = "contactForm-info-field-redAlert";
 
-// паттерны для валидации
-var validation_patterns = {
-	"customer_name_id": new RegExp(/^[а-яА-ЯёЁa-zA-Z ]+$/),
-	"customer_email_id": new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/),
-	"customer_phone_id": new RegExp(/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/)
+var patterns = {
+	"customer_name_id": /^[а-яА-ЯёЁa-zA-Z ]+$/,
+	"customer_email_id": /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/,
+	"customer_phone_id": /^((8|\+7)[\-]?)?(\(?\d{3}\)?[\-]?)?[\d\-]{7,10}$/
 }
-var pattern_name = /^[а-яА-ЯёЁa-zA-Z ]+$/;
-var pattern_email = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-var pattern_phone = /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/;
-// --- END OF VAR ---
 
-// функция для инициализации валидации формы
-function init_cart_form_validation(){
-	// присваиваем функцию при нажатии клавиши в инпуте
-	bind_inputs_keyUp();
-
-	// функция при попытке отправить форму
-	bind_submit_click();
-}
 
 // присваивает событие по нажатии на клавишу для проверки инпутов по паттерну
-function bind_inputs_keyUp(){
-	$(".contactForm-info-field").each(function ( i ){
-		$(this).bind("keyup", function(){
-			on_keyUp($(this).attr('id')); 
-		});
-	});
-} 
 
-// присваивает событие при нажатии на кнопку "Отправить"
-function bind_submit_click(){
-	$("#customer_submit_id").bind("click", function(event){
-		sumbit_check(event);
-	});
-}
+var inputFields = $('.contactForm-info-field');
 
-// функция, срабатывающая при нажатии на клавишу в определенном инпуте
-function on_keyUp(id){
-	// получаем текст текущего инпута по его id
-	var input_text = $("#"+id).val();
-	// берем паттерн из массива паттернов по id
-	var pattern = validation_patterns[id];
+inputFields.keyup(function(){
 
-	// делаем тест
-	var test_result = pattern.test(input_text);
+	//записываем все, что нудно в перменные
+	var elem = $(this);
 
-	// записываем результаты теста в объект validation
-	validation[id] = test_result;
+	var elemId = elem.attr('id');
 
-	// если есть ошибка, показываем
-	display_validation_result(id);
-} 
+	var value = elem.val();
+	var parent = elem.closest('.input-container');
+	var error = parent.children('.contactForm-info-error');
 
-// отображает ошибку при наборе в текущем инпуте
-function display_validation_result(id){
-	// id элемента с текстом ошибки
-	var error_id = "#" + id + "_error";
+	if ( typeof elemId != 'undefined' )
+	{
 
-	// показываем ошибку
-	if (!validation[id]){
-		$(error_id).addClass(keyup_alert_class);
-	}
-	// скрываем ошибку
-	else{
-		$(error_id).removeClass(keyup_alert_class);
-		$("#"+id).removeClass(submit_alert_class);
-	}
-}
-
-// проверяет, соблюдены ли все условия, перед отправкой формы
-// если нет, отправка формы предотвращается
-function sumbit_check(event){
-	var prevent_send = false;
-	// проходимся по значениям validaion. если что-то false, 
-	// предотвращаем отправку и подсвечиваем красным
-	for (x in validation){
-		var curId = "#" + x;
-		if (!validation[x]){
-			$(curId).addClass(submit_alert_class);
-			prevent_send = true;
+		//проверим всю шелуху на регулярки
+		if ( patterns[elemId].test(value) )
+		{
+			validation[elemId] = true;
+			error.slideUp(200);
 		}
-		else{
-			$(curId).removeClass(submit_alert_class);
+		else
+		{
+			validation[elemId] = false;
+			error.slideDown(200);
 		}
 	}
 
-	if (prevent_send){
-		event.preventDefault();
+});
+
+
+//сабмит
+
+var form = $('#cart_form');
+
+form.bind('submit', function(event){
+	event.preventDefault();
+
+
+	for ( key in validation )
+	{
+		if( !validation[key] )
+		{
+			console.log('tut');
+			inputFields.trigger('keyup');
+			return false;
+		}
 	}
-}
+
+	var ajaxData = 'action=checkout&' + $(this).serialize();
+
+	console.log(ajaxUrl + " " + ajaxData);
+
+	$.ajax({
+		url: ajaxUrl,
+		type: 'POST',
+		data: ajaxData,
+		success: function(data){
+
+			var response = JSON.parse(data);
+
+			//если  все прошло успешно, перенаправим пользователя, если нет, выведем ошибку
+			if ( response.status = 'ok' )
+				window.location.href = '/checkout';
+			else
+				alert('Ошибка, напишите нам нам, пожалуйста, на почту!');
+		}
+	});
+
+});
+
+});

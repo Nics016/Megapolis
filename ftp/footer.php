@@ -1,3 +1,8 @@
+<!-- GETTING THEME OPTIONS VARIABLE -->
+<?php 
+	$var_email1 = get_theme_mod('input_email1', 'info@megapolis-mck.ru'); 
+?>
+<!-- END OF GETTING THEME OPTIONS VARIABLE -->
 	<footer>
 		<div class="container clearfix">
 			<?php $terms = get_children_terms(19); ?>
@@ -51,7 +56,7 @@
 					КПП: 771801001<br>
 					РС: 40702810300000005908<br><br></span>
 					<i class="fa fa-envelope" aria-hidden="true"></i>
-					<span class="footer-shopinfo-text-email">E-mail: info@megapolis-mck.ru</span>
+					<span class="footer-shopinfo-text-email">E-mail: <?= $var_email1 ?></span>
 				</div>
 			</div>
 		</div>
@@ -60,6 +65,6 @@
 	<input type="hidden" id="csrf" name="csrf" value="<?= csrf() ?>">
 
 	<div id="add-cart-modal"></div>
-</div>	
+</div>
 </body>
 </html>
