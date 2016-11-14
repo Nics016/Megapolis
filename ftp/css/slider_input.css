@@ -21,7 +21,6 @@ input[type=range]::-webkit-slider-thumb {
   border: none;
   height: 105px;
   width: 75px;
-  background-image: url("../img/range_car.png");
   background-repeat: no-repeat;
   background-size: contain;
   opacity: 1;

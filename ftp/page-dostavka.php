@@ -12,13 +12,9 @@
 
 	<script>
 		$(document).ready(function(){
-			// рублей за 1 км
-			var multiplier = <?php echo $var_multiplier; ?>;
-			var dimension = <?php echo '"'.$var_dimension.'"'; ?>;
-			init_range_car(multiplier, dimension); 
+			init_range_cars(); 
 		});
 	</script>
-
 
 	<div class="container clearfix">
 		<?php get_sidebar(); ?>
@@ -78,17 +74,42 @@
 				}
 			}
 			?>
-			<!-- END OF TABLE OUTPUT -->
+			<!-- END OF TABLE OUTPUT --> 
+			
+			<!-- CARS -->
+			<style>	
+			<?php 
+				$i = 0;
+				foreach ($GLOBALS['cars'] as $car) { 
+					$i++;
+					$imgUrl = $car['img'];
+			?>
+			.<?php echo "car_input".$i; ?>::-webkit-slider-thumb {
+			  background-image: url("<?php echo $imgUrl; ?>");
+			}
+			<?php } ?>
+			</style>
 
-			<!-- CAR SCROLLER -->
+			<?php 
+				$i = 0;
+				foreach ($GLOBALS['cars'] as $car) { 
+					$i++;
+					$imgUrl = $car['img'];
+			?>
 			<div class="car">
-				<input type="range" 
-					   min="<?= $var_min; ?>" 
-					   max="<?= $var_max; ?>" 
-					   step="<?= $var_step; ?>" id="range_car_id">
-				<span class="range_car_text" id="range_car_text_id"></span>
+				<input class="car_input <?php echo "car_input".$i; ?>" 
+					type="range" 
+					   min="<?= $car['min'] ?>" 
+					   max="<?=$car['max'] ?>" 
+					   step="<?= $car['step'] ?>"
+					   dimen="<?= $car['distancein'] ?>"
+					   multi="<?= $car['rubstep'] ?>"
+					   id="range_car">
+				<span class="range_car_text" 
+				      id="range_car_span<?= $i ?>" style="color: <?=$car['color'];?>"></span>
 			</div>
-			<!-- END OF CAR SCROLLER -->
+			<?php } ?>
+			<!-- END OF CARS -->
 		</div>
 	</div>
 </main> 

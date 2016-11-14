@@ -1,4 +1,5 @@
 <?php
+$cars = array();
 
 add_filter('show_admin_bar', '__return_false'); //скроем на время админ бар сверху
 
@@ -119,19 +120,31 @@ add_theme_support( 'post-thumbnails' );
 require_once("options_page.php");
 	
 // Shortcode бегунка с машинкой
-function wporg_shortcodes_init()
+function car_shortcodes_init()
 {
-    function wporg_shortcode($atts = [], $content = null)
+    function car_shortcode($atts = [], $content = null)
     {
-        // do something to $content
+        // normalize attribute keys, lowercase
+    	$atts = array_change_key_case((array)$atts, CASE_LOWER);
  
+    	// override default attributes with user attributes
+    	$wporg_atts = shortcode_atts([
+                                     'min' => '1',
+                                     'max' => '20',
+                                     'step' => '1',
+                                     'rubstep' => "50",
+                                     'distancein' => "КМ",
+                                     'img' => get_template_directory_uri(). "/img/range_car.png",
+                                     "color" => "blue"
+                                 ], $atts, $tag);
+    	array_push($GLOBALS['cars'], $wporg_atts);        
         // always return
         return $content;
     }
-    add_shortcode('wporg', 'wporg_shortcode');
+    add_shortcode('car', 'car_shortcode');
 }
 
-add_action('init', 'wporg_shortcodes_init');
+add_action('init', 'car_shortcodes_init');
 
 // --- CUSTOM FUNCTIONS ---
 // Функции обработки категорий

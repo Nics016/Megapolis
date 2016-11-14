@@ -60,6 +60,7 @@
 	$var_phone = get_theme_mod('input_phone', '8-495-444-77-55'); 
 	$var_phone_subtext = get_theme_mod('input_phone_subtext', 'Общий многоканальный телефон'); 
 	$var_address = get_theme_mod('input_address', 'г. Москва, пр-т Вернадского 62, стр 3'); 
+	$var_logo = get_theme_mod('input_logo', 'http://megapolis-mck.ru/wp-content/uploads/2016/11/logo1.png');
 ?>
 <!-- END OF GETTING THEME OPTIONS VARIABLE -->
 
@@ -95,7 +96,8 @@
 		<!-- CONTACT INFORMATION -->
 		<div class="container clearfix">
 			<div class="main-header-logo">
-				<a href="<?= site_url() ?>" class="main-header-logo-pic"></a>
+				<a href="<?= site_url() ?>" class="main-header-logo-pic"
+					style="background-image: url('<?=$var_logo?>');"></a>
 			</div>
 			<div class="main-header-phone">
 				<a href="tel:<?= $var_phone; ?>" class="main-header-phone-text">

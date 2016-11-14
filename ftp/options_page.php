@@ -20,10 +20,24 @@ add_action('customize_register', function($customizer){
     );
 
     init_main_page_inputs($customizer);
-    init_dostavka_page_inputs($customizer);
 });
 
 function init_main_page_inputs($customizer){
+    // logo
+    $customizer->add_setting(
+    'input_logo',
+    array('default' => 'http://megapolis-mck.ru/wp-content/uploads/2016/11/logo1.png')
+    );
+    // контрол
+    $customizer->add_control(
+    'input_logo',
+    array(
+        'label' => 'Ссылка на изображение логотипа',
+        'section' => 'section_main_page',
+        'type' => 'text',
+    )
+    );
+
 	 // телефон
 	$customizer->add_setting(
     'input_phone',
@@ -113,83 +127,7 @@ function init_main_page_inputs($customizer){
         'type' => 'text',
     )
     );
-}
 
-function init_dostavka_page_inputs($customizer){
-	// min
-	$customizer->add_setting(
-    'input_min',
-    array('default' => '1')
-	);
-	// контрол
-	$customizer->add_control(
-    'input_min',
-    array(
-        'label' => 'Минимум',
-        'section' => 'section_dostavka_page',
-        'type' => 'text',
-    )
-	);
-
-	// max
-	$customizer->add_setting(
-    'input_max',
-    array('default' => '20')
-	);
-	// контрол
-	$customizer->add_control(
-    'input_max',
-    array(
-        'label' => 'Максимум',
-        'section' => 'section_dostavka_page',
-        'type' => 'text',
-    )
-	);
-
-	// step
-	$customizer->add_setting(
-    'input_step',
-    array('default' => '1')
-	);
-	// контрол
-	$customizer->add_control(
-    'input_step',
-    array(
-        'label' => 'За шаг',
-        'section' => 'section_dostavka_page',
-        'type' => 'text',
-    )
-	);
-
-	// multiplier in Rubles
-	$customizer->add_setting(
-    'input_multiplier',
-    array('default' => '133')
-	);
-	// контрол
-	$customizer->add_control(
-    'input_multiplier',
-    array(
-        'label' => 'Рублей за 1 шаг',
-        'section' => 'section_dostavka_page',
-        'type' => 'text',
-    )
-	);
-
-	// distance dimension (KM)
-	$customizer->add_setting(
-    'input_dimension',
-    array('default' => 'КМ')
-	);
-	// контрол
-	$customizer->add_control(
-    'input_dimension',
-    array(
-        'label' => 'Дистанция измеряется в',
-        'section' => 'section_dostavka_page',
-        'type' => 'text',
-    )
-	);
 }
 
 ?>
